@@ -1,0 +1,2331 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android FOSS Repository | Privacy & Freedom</title>
+    <meta name="description" content="A list of Free and Open Source Software (FOSS) for Android – saving Freedom and Privacy." />
+		<meta name="keywords" content="android, technology, digital, modern, isolated, background, mobile, robot, illustration, app, application, design, smartphone, vector, icon, device, smart, screen, business, tech, cellphone, 3d, display, ai, phone, white, artificial intelligence, cyborg, telephone, mockup, web, communication, innovation, electronic, computer, template, set, data, media, blank, intelligence, learning, network, automation, artificial, robotic, hand, samsung, futuristic, flat, wireless, machine, science, internet, gadget, graphic, development, galaxy, interface, future, website, concept, service, information, software, chatting, person, speech, chat, bot, social, shopping, networking, visual, brain, datum, element, color, emoji, linux" />
+		<meta http-equiv="expires" content="0">
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content="Android FOSS Repository | Privacy & Freedom">
+		<meta property="og:description" content="A list of Free and Open Source Software (FOSS) for Android – saving Freedom and Privacy.">
+		<meta property="og:image" content="https://static.wikia.nocookie.net/android/images/c/c5/Bugdroid_2023.png/revision/latest?cb=20231126190303">
+		<meta property="og:image:alt" content="Android FOSS Repository | Privacy & Freedom">
+		<meta property="og:type" content="website">
+	  	<meta property="og:url" content="https://android-foss.github.io">
+        <link rel="icon" href="https://developer.android.com/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2674436118918544"
+     crossorigin="anonymous"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+
+    <style>
+        :root {
+            --scroll-offset: 100px;
+            --font-main: 'Outfit', sans-serif;
+
+            /* Light Theme */
+            --bg-gradient-light: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            --glass-bg-light: rgba(255, 255, 255, 0.6);
+            --glass-border-light: rgba(255, 255, 255, 0.6);
+            --text-color-light: #1e293b;
+            --heading-color-light: #0f172a;
+            --link-color-light: #2563eb;
+            --accent-light: #4f46e5;
+
+            /* Dark Theme */
+            --bg-gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --glass-bg-dark: rgba(15, 23, 42, 0.7);
+            --glass-border-dark: rgba(255, 255, 255, 0.08);
+            --text-color-dark: #cbd5e1;
+            --heading-color-dark: #f8fafc;
+            --link-color-dark: #60a5fa;
+            --accent-dark: #818cf8;
+
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            --backdrop: blur(12px);
+            --radius: 16px;
+            --header-height: 80px;
+        }
+
+        [data-theme="light"] {
+            --bg-body: var(--bg-gradient-light);
+            --glass-bg: var(--glass-bg-light);
+            --glass-border: var(--glass-border-light);
+            --text-color: var(--text-color-light);
+            --heading-color: var(--heading-color-light);
+            --link-color: var(--link-color-light);
+            --accent: var(--accent-light);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: var(--bg-gradient-dark);
+            --glass-bg: var(--glass-bg-dark);
+            --glass-border: var(--glass-border-dark);
+            --text-color: var(--text-color-dark);
+            --heading-color: var(--heading-color-dark);
+            --link-color: var(--link-color-dark);
+            --accent: var(--accent-dark);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-body);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding-top: var(--header-height);
+            /* Offset for fixed header */
+            transition: background 0.5s ease;
+            background-attachment: fixed;
+        }
+        ins.adsbygoogle[data-ad-status="unfilled"] {
+        display: none !important;
+    }
+
+        /* --- BLOB BACKGROUND --- */
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 10s infinite alternate;
+        }
+
+        .blob-1 {
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: #8b5cf6;
+        }
+
+        .blob-2 {
+            bottom: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(30px, 50px);
+            }
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop);
+            -webkit-backdrop-filter: var(--backdrop);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            box-shadow: var(--shadow-glass);
+        }
+
+        .logo-area {
+            display: flex;
+            flex-direction: column;
+            min-width: 150px;
+        }
+
+        .logo-area h1 {
+            font-size: 1.4rem;
+            color: var(--heading-color);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .logo-area span {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        /* Desktop Navigation (Horizontal Scroll) */
+        .desktop-nav {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 0 20px;
+            margin: 0 15px;
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .desktop-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Chrome */
+
+        .nav-link {
+            white-space: nowrap;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            color: var(--text-color);
+            border-radius: 20px;
+            border: 1px solid transparent;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Controls Area */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #searchBox {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: var(--text-color);
+            outline: none;
+            width: 150px;
+            transition: width 0.3s, background 0.3s;
+            font-family: var(--font-main);
+        }
+
+        #searchBox:focus {
+            width: 220px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--text-color);
+            transition: transform 0.2s;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-color);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Mobile Menu Container */
+        .mobile-menu {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transform: translateY(-150%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 999;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        /* --- CONTENT AREA --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Image */
+        .hero-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0 40px 0;
+            perspective: 1000px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            transform-style: preserve-3d;
+            opacity: 0;
+            /* Init hidden for GSAP */
+            max-width: 100%;
+            width: 600px;
+        }
+
+        .image-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .shine {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--backdrop);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            content-visibility: auto;
+            /* Performance */
+            contain-intrinsic-size: 500px;
+
+        }
+
+        h2 {
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: var(--heading-color);
+        }
+
+        h3 {
+            color: var(--accent);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+
+        }
+
+        .section-card,
+        h2,
+        h3 {
+            scroll-margin-top: var(--scroll-offset);
+        }
+
+        /* Tables & Lists */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .data-table th,
+        .data-table td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .data-table th {
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr {
+            transition: 0.2s;
+            border-radius: 8px;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: scale(1.005);
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .mirror-link {
+            display: inline-flex;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            margin-right: 5px;
+            color: var(--text-color);
+        }
+
+        .mirror-link:hover {
+            background: var(--accent);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* --- APP LIST/GRID SYSTEM --- */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        /* List View (Default) */
+        .app-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+
+        .app-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .app-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: block;
+            text-decoration: none;
+        }
+
+        .app-name:hover {
+            color: var(--accent);
+        }
+
+        .app-links {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Grid View (Toggled via class on parent) */
+        .view-grid .app-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .view-grid .app-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .view-grid .app-name {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+        }
+
+        .view-grid .app-links {
+            width: 100%;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        /* View Toggle Button */
+        #viewToggleBtn {
+            font-size: 1.2rem;
+            margin-left: 5px;
+            opacity: 0.8;
+        }
+
+        /* Improved Nav Grid (TOC) */
+        /* --- CSS PERBAIKAN: Center Align TOC Buttons --- */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            padding: 10px 0;
+        }
+
+        .nav-grid a {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            min-height: 60px;
+        }
+
+        .nav-grid a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .nav-grid a:hover::before {
+            transform: translateX(100%);
+        }
+
+        .nav-grid a:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: transparent;
+        }
+
+        /* Scroll Top Button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        #scrollToTopBtn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #scrollToTopBtn:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- SHIMMER / SKELETON LOADING --- */
+        .skeleton-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skeleton-header {
+            height: 30px;
+            width: 40%;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .skeleton-item {
+            height: 50px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 15px;
+            border-radius: 12px;
+        }
+
+        .shimmer::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0) 0,
+                    rgba(255, 255, 255, 0.05) 20%,
+                    rgba(255, 255, 255, 0.1) 60%,
+                    rgba(255, 255, 255, 0));
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Intro Layout */
+        .intro-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            /* Be responsive */
+        }
+
+        .intro-flex .text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .intro-flex .hero-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .text {
+            color: #dfdcff;
+            font-size: clamp(2rem, 12rem, 5vw);
+            line-height: 1.2;
+            box-sizing: border-box;
+            padding: 5%;
+            width: 100%;
+            text-align: left;
+            /* Align left per side-by-side request (overriding generic center) */
+            perspective: 500px;
+        }
+
+        /* Mobile adjustment for intro */
+        @media (max-width: 900px) {
+            .intro-flex {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .text {
+                text-align: center;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            #searchBox {
+                width: 120px;
+            }
+
+            #searchBox:focus {
+                width: 160px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .intro-flex .text {
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
+                padding: 10px;
+            }
+
+            .image-wrapper {
+                width: 100%;
+            }
+
+            .data-table thead {
+                display: none;
+            }
+
+            .data-table td {
+                display: block;
+                text-align: right;
+                padding: 8px 5px;
+                border-bottom: none;
+            }
+
+            .data-table td::before {
+                content: attr(data-label);
+                float: left;
+                font-weight: 600;
+                opacity: 0.7;
+                font-size: 0.85rem;
+            }
+
+            .data-table tr {
+                border: 1px solid var(--glass-border);
+                margin-bottom: 10px;
+                display: block;
+                padding: 10px;
+                background: rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <header>
+        <div class="logo-area">
+            <h1>Android FOSS</h1>
+            <span>Privacy & Freedom</span>
+        </div>
+
+        <!-- Desktop Nav (Pills) -->
+        <nav class="desktop-nav" id="desktopNav">
+            <!-- Items injected by JS -->
+        </nav>
+
+        <div class="controls">
+            <input type="text" id="searchBox" placeholder="Search apps...">
+            <button class="icon-btn" id="viewToggleBtn" aria-label="Toggle Grid/List">⊞</button>
+            <button class="icon-btn" id="themeBtn" aria-label="Toggle Theme">☀️</button>
+            <div class="hamburger" id="hamburgerBtn">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <!-- Items injected by JS -->
+    </div>
+
+    <div class="container">
+        <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2674436118918544"
+     data-ad-slot="9501441339"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div class="intro-flex">
+            <div class="text">
+                A list of Free and Open Source Software (FOSS) for Android – saving Freedom and Privacy.
+            </div>
+            <!-- GSAP Hero -->
+            <div class="hero-container">
+                <div class="image-wrapper" id="heroWrapper">
+                    <div class="shine"></div>
+                    <img src="https://www.idnstart.com/media/images/2024/01/1165a6ef831cb08.gif?location=1&width=&height=&quality=90&fit=1"
+                        alt="Android FOSS Hero" id="heroImg">
+                </div>
+            </div>
+        </div>
+
+        <main id="contentArea">
+            <div style="text-align:center; padding: 50px; font-size:1.2rem;">Loading Repository...</div>
+        </main>
+
+        <footer style="text-align: center; margin-top: 50px; opacity: 0.7; padding-bottom: 80px;">
+            <p>&copy; 2026 Android FOSS Repository.</p>
+        </footer>
+    </div>
+
+    <button id="scrollToTopBtn" aria-label="Scroll to Top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
+    </button>
+
+    <script>
+        // --- 1. DATA RAW ---
+        const rawMarkdown = `
+# Android FOSS
+
+[![CI](https://github.com/offa/android-foss/workflows/ci/badge.svg)](https://github.com/offa/android-foss/actions)
+[![License](https://img.shields.io/badge/license-GPLv3-yellow.svg)](LICENSE)
+
+A list of Free and Open Source Software *(FOSS)* for Android – saving *Freedom* and *Privacy*.
+
+## Table of Contents
+
+* [App Store](#-app-store-)
+* [Apps](#-apps-)
+    * [Ad Blocker](#-ad-blocker)
+    * [Anime &amp; Manga](#-anime--manga)
+    * [Automation](#-automation)
+    * [Barcode &amp; QR Code Scanner](#-barcode--qr-code-scanner)
+    * [Battery](#-battery)
+    * [Browser](#-browser)
+    * [Calculator](#-calculator)
+    * [Calendar](#-calendar)
+    * [Call Blocker &amp; Spam Filter](#-call-blocker--spam-filter)
+    * [Camera](#-camera)
+    * [Clock &amp; Time](#-clock--time)
+    * [Community Clients](#-community-clients)
+    * [Contacts](#-contacts)
+    * [Development](#-development)
+    * [Dialer](#-dialer)
+    * [Diary](#-diary)
+    * [Dictionaries](#-dictionaries)
+    * [Document &amp; PDF Viewer](#-document--pdf-viewer)
+    * [Document Scanner](#-document-scanner)
+    * [Downloader &amp; Manager](#-downloader--manager)
+    * [Email Aliases](#-email-aliases)
+    * [Email Clients](#-email-clients)
+    * [File Encryption](#-file-encryption)
+    * [File Manager](#-file-manager)
+    * [File Sharing](#-file-sharing)
+    * [Finance](#-finance)
+    * [Firewall](#-firewall)
+    * [Flashcard](#-flashcard)
+    * [Flashlight](#-flashlight)
+    * [Graphics](#-graphics)
+    * [Habit Tracker](#-habit-tracker)
+    * [Icon Packs](#-icon-packs)
+    * [Image Manipulation](#-image-manipulation)
+    * [Image Viewer &amp; Gallery](#-image-viewer--gallery)
+    * [Keyboard](#-keyboard)
+    * [Launcher &amp; Desktop](#-launcher--desktop)
+    * [Maps &amp; Navigation](#-maps--navigation)
+    * [Media Frontends](#-media-frontends)
+    * [Messaging](#-messaging)
+    * [Miscellaneous](#-miscellaneous)
+    * [Movie &amp; Cinema](#-movie--cinema)
+    * [Music](#-music)
+    * [Music &amp; Audio Player](#-music--audio-player)
+    * [Notes](#-notes)
+    * [Office](#-office)
+    * [Password &amp; Authentication](#-password--authentication)
+    * [Podcast &amp; Audio Book Player](#-podcast--audio-book-player)
+    * [Privacy &amp; Security](#-privacy--security)
+    * [Public Transport](#-public-transport)
+    * [Religion](#-religion)
+    * [RSS Readers](#-rss-readers)
+    * [Sandboxing](#-sandboxing)
+    * [Science &amp; Education](#-science--education)
+    * [SMS](#-sms)
+    * [Sports &amp; Health](#-sports--health)
+    * [Synchronisation](#-synchronisation)
+    * [System](#-system)
+    * [Terminals](#-terminals)
+    * [Text Editors](#-text-editors)
+    * [Text-to-Speech](#-text-to-speech)
+    * [ToDo Lists](#-todo-lists)
+    * [Translation](#-translation)
+    * [URL Manipulation](#-url-manipulation)
+    * [Utilities](#-utilities)
+    * [Video Player](#-video-player)
+    * [VPN](#-vpn)
+    * [Wallpapers](#-wallpapers)
+    * [Weather](#-weather)
+* [Games](#-games-)
+    * [Board](#-board)
+    * [Card](#-card)
+    * [Educational](#-educational)
+    * [Emulator](#-emulator)
+    * [Miscellaneous](#-miscellaneous-1)
+    * [Music](#-music-1)
+    * [Puzzle](#-puzzle)
+    * [Racing](#-racing)
+    * [Retro](#-retro)
+    * [Strategy](#-strategy)
+    * [Word](#-word)
+* [Rooting and Recovery](#-rooting-and-recovery-)
+* [Tools](#-tools-)
+* [Tutorials and Guides](#-tutorials-and-guides-)
+* [Getting more](#-getting-more--)
+
+-
+
+## App Store
+
+* [F-Droid](https://f-droid.org)
+    * [Neo-Store](https://github.com/NeoApplications/Neo-Store) [[F-Droid](https://f-droid.org/packages/com.machiav3lli.fdroid)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.machiav3lli.fdroid)]
+    * [Droid-ify](https://github.com/Iamlooker/Droid-ify) [[F-Droid](https://f-droid.org/packages/com.looker.droidify)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.looker.droidify)]
+    * [F-Droid Classic](https://git.bubu1.eu/Bubu/fdroidclassic) [[F-Droid](https://f-droid.org/packages/eu.bubu1.fdroidclassic)]
+    * [G-Droid](https://gitlab.com/gdroid/gdroidclient) [[F-Droid](https://f-droid.org/packages/org.gdroid.gdroid)]
+* [Accrescent](https://github.com/accrescent/accrescent)
+* [Aurora Store](https://gitlab.com/AuroraOSS/AuroraStore) [[F-Droid](https://f-droid.org/packages/com.aurora.store)]
+* [IzzyOnDroid](https://gitlab.com/sunilpaulmathew/izzyondroid) [[F-Droid](https://f-droid.org/packages/in.sunilpaulmathew.izzyondroid)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/in.sunilpaulmathew.izzyondroid)]
+* [Obtainium](https://github.com/ImranR98/Obtainium) [[F-Droid](https://f-droid.org/packages/dev.imranr.obtainium.fdroid)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/dev.imranr.obtainium)]
+* [Zap.Store](https://github.com/zapstore/zapstore)
+
+-
+
+## Apps
+
+### • Ad Blocker
+
+* [AdAway](https://github.com/AdAway/AdAway) [[F-Droid](https://f-droid.org/packages/org.adaway)]
+* [Blokada](https://github.com/blokadaorg/blokada)
+* [DNSNet](https://github.com/t895/DNSNet) [[F-Droid](https://f-droid.org/packages/dev.clombardo.dnsnet)]
+* [personalDNSfilter](https://github.com/IngoZenz/personaldnsfilter) [[F-Droid](https://f-droid.org/packages/dnsfilter.android)]
+* [TrackerControl](https://github.com/TrackerControl/tracker-control-android) [[F-Droid](https://f-droid.org/packages/net.kollnig.missioncontrol.fdroid)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/net.kollnig.missioncontrol)]
+
+### • Anime & Manga
+
+* [Aniyomi](https://github.com/aniyomiorg/aniyomi)
+* [Bangumi](https://github.com/czy0729/Bangumi) [[F-Droid](https://f-droid.org/packages/com.czy0729.bangumi)]
+* [DailyAL](https://github.com/JICA98/DailyAL) [[F-Droid](https://f-droid.org/packages/io.github.jica98)]
+* [Kahon](https://github.com/AmanoTeam/Kahon) [[F-Droid](https://f-droid.org/packages/com.amanoteam.kahon)]
+* [Kotatsu](https://github.com/nv95/Kotatsu) [[F-Droid](https://f-droid.org/packages/org.koitharu.kotatsu)]
+* [Nekome](https://github.com/Chesire/Nekome) [[F-Droid](https://f-droid.org/packages/com.chesire.nekome)]
+
+### • Automation
+
+* [Automation](https://git.server47.de/jens/Automation) [[F-Droid](https://f-droid.org/packages/com.jens.automation2)]
+* [Easer](https://github.com/renyuneyun/Easer) [[F-Droid](https://f-droid.org/packages/ryey.easer)]
+* [Home Assistant](https://github.com/home-assistant/android) [[F-Droid](https://f-droid.org/packages/io.homeassistant.companion.android.minimal)]
+* [Smart AutoClicker](https://github.com/Nain57/Smart-AutoClicker) [[F-Droid](https://f-droid.org/packages/com.buzbuz.smartautoclicker)]
+
+### • Barcode & QR Code Scanner
+
+* [Barcode Scanner](https://gitlab.com/Atharok/BarcodeScanner) [[F-Droid](https://f-droid.org/packages/com.atharok.barcodescanner)]
+* [Binary Eye](https://github.com/markusfisch/BinaryEye) [[F-Droid](https://f-droid.org/packages/de.markusfisch.android.binaryeye)]
+* [Catima](https://github.com/CatimaLoyalty/Android) [[F-Droid](https://f-droid.org/packages/me.hackerchick.catima)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/me.hackerchick.catima)]
+* [Privacy Friendly QR Scanner](https://github.com/SecUSo/privacy-friendly-qr-scanner) [[F-Droid](https://f-droid.org/packages/com.secuso.privacyFriendlyCodeScanner)]
+
+### • Battery
+
+* [Battery Tool](https://github.com/Domi04151309/BatteryTool) [[F-Droid](https://f-droid.org/packages/io.github.domi04151309.batterytool)]
+* [BatteryBot Pro](https://github.com/darshan-/Battery-Indicator-Pro) [[F-Droid](https://f-droid.org/packages/com.darshancomputing.BatteryIndicatorPro)]
+* [BCL](https://github.com/MuntashirAkon/BatteryChargeLimiter) [[IzzyOnDroid](https://apt.izzysoft.de/packages/io.github.muntashirakon.bcl)]
+* [SaverTuner](https://codeberg.org/s1m/savertuner) [[F-Droid](https://f-droid.org/packages/s1m.savertuner)]
+* [Wattz](https://github.com/dubrowgn/wattz) [[F-Droid](https://f-droid.org/packages/dubrowgn.wattz)]
+
+### • Browser
+
+* [Cromite](https://github.com/uazo/cromite)
+* [DuckDuckGo Privacy Browser](https://github.com/duckduckgo/Android) [[F-Droid](https://f-droid.org/packages/com.duckduckgo.mobile.android)]
+* [EinkBro](https://github.com/plateaukao/browser) [[F-Droid](https://f-droid.org/packages/info.plateaukao.einkbro)]
+* [Fennec](https://hg.mozilla.org/releases/mozilla-esr68) [[F-Droid](https://f-droid.org/packages/org.mozilla.fennec_fdroid)]
+* [FFUpdater](https://github.com/Tobi823/ffupdater) [[F-Droid](https://f-droid.org/packages/de.marmaro.krt.ffupdater)]
+* [FOSS Browser](https://codeberg.org/Gaukler_Faun/FOSS_Browser) [[F-Droid](https://f-droid.org/packages/de.baumann.browser)]
+* [Fulguris Web Browser](https://github.com/Slion/Fulguris) [[F-Droid](https://f-droid.org/packages/net.slions.fulguris.full.fdroid)]
+* [IdiomReplaceX Browser App](https://github.com/idiomReplaceX/IdiomReplaceX-app) [[F-Droid](https://f-droid.org/packages/de.idiomreplacex.browser_app)]
+* [IronFox](https://gitlab.com/ironfox-oss/IronFox)
+* [Lightning](https://github.com/anthonycr/Lightning-Browser) [[F-Droid](https://f-droid.org/packages/acr.browser.lightning)]
+* [Monocles Browser](https://codeberg.org/Arne/monocles_browser) [[F-Droid](https://f-droid.org/packages/de.monocles.browser)]
+* [Native Alpha](https://github.com/cylonid/NativeAlphaForAndroid) [[IzzyOnDroid](https://apt.izzysoft.de/fdroid/packages/com.cylonid.nativealpha)]
+* [Privacy Browser](https://gitweb.stoutner.com/?p=PrivacyBrowserAndroid.git;a=summary) [[F-Droid](https://f-droid.org/packages/com.stoutner.privacybrowser.standard)]
+* [SmartCookieWeb](https://github.com/CookieJarApps/SmartCookieWeb) [[F-Droid](https://f-droid.org/packages/com.cookiegames.smartcookie)]
+* [Tor Browser](https://gitlab.torproject.org/tpo/applications/tor-browser)
+* [Webview Kiosk](https://github.com/nktnet1/webview-kiosk) [[F-Droid](https://f-droid.org/packages/uk.nktnet.webviewkiosk)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/uk.nktnet.webviewkiosk)]
+
+### • Calculator
+
+* [ArityCalc](https://github.com/woheller69/Arity) [[F-Droid](https://f-droid.org/packages/org.woheller69.arity)]
+* [Calculator You](https://github.com/forzzzzz/Calculator-You) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.marktka.calculatorYou)]
+* [CuteCalc](https://github.com/sosauce/CuteCalc) [[F-Droid](https://f-droid.org/packages/com.sosauce.cutecalc)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.sosauce.cutecalc)]
+* [Fossify Calculator](https://github.com/FossifyOrg/Calculator) [[F-Droid](https://f-droid.org/packages/org.fossify.math)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.math)]
+* [NumberHub](https://github.com/Myzel394/NumberHub) [[IzzyOnDroid](https://apt.izzysoft.de/packages/app.myzel394.numberhub)]
+* [OpenCalc](https://github.com/Darkempire78/OpenCalc) [[F-Droid](https://f-droid.org/packages/com.darkempire78.opencalculator)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.darkempire78.opencalculator)]
+* [yetCalc](https://github.com/Yet-Zio/yetCalc) [[F-Droid](https://f-droid.org/packages/yetzio.yetcalc)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/yetzio.yetcalc)]
+
+### • Calendar
+
+* [Birday](https://github.com/m-i-n-a-r/birday) [[F-Droid](https://f-droid.org/packages/com.minar.birday)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.minar.birday)]
+* [Etar](https://github.com/Etar-Group/Etar-Calendar) [[F-Droid](https://f-droid.org/packages/ws.xsoh.etar)]
+* [Fossify Calendar](https://github.com/FossifyOrg/Calendar) [[F-Droid](https://f-droid.org/packages/org.fossify.calendar)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.calendar)]
+* [Tuta Calendar](https://github.com/tutao/tutanota) [[F-Droid](https://f-droid.org/packages/de.tutao.calendar)]
+
+### • Call Blocker & Spam Filter
+
+* [NoPhoneSpam](https://gitlab.com/bitfireAT/NoPhoneSpam) [[F-Droid](https://f-droid.org/packages/at.bitfire.nophonespam)]
+* [Silence](https://github.com/x13a/Silence) [[F-Droid](https://f-droid.org/packages/me.lucky.silence)]
+* [SpamBlocker (Call & SMS)](https://github.com/aj3423/SpamBlocker) [[F-Droid](https://f-droid.org/packages/spam.blocker)]
+
+### • Camera
+
+* [Cryptocam](https://gitlab.com/cryptocam/cryptocam) [[F-Droid](https://f-droid.org/packages/com.tnibler.cryptocam)]
+* [FadCam](https://github.com/anonfaded/FadCam) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.fadcam)]
+* [Fossify Camera](https://github.com/FossifyOrg/Camera) [[F-Droid](https://f-droid.org/packages/org.fossify.camera)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.camera)]
+* [FreeDcam](https://github.com/KillerInk/FreeDcam) [[F-Droid](https://f-droid.org/packages/troop.com.freedcam)]
+* [Libre Camera](https://github.com/iakmds/librecamera) [[F-Droid](https://f-droid.org/packages/com.iakmds.librecamera)]
+* [ObscuraCam](https://github.com/guardianproject/ObscuraCam) [[F-Droid](https://f-droid.org/packages/org.witness.sscphase1)]
+* [Open Camera](https://sourceforge.net/projects/opencamera/) [[F-Droid](https://f-droid.org/packages/net.sourceforge.opencamera)]
+* [Secure Camera](https://github.com/GrapheneOS/Camera)
+
+### • Clock & Time
+
+* [Chrono](https://github.com/vicolo-dev/chrono) [[F-Droid](https://f-droid.org/packages/com.vicolo.chrono)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.vicolo.chrono)]
+* [Chronos](https://github.com/meenbeese/Chronos) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.meenbeese.chronos)]
+* [Clock](https://github.com/BlackyHawky/Clock) [[F-Droid](https://f-droid.org/packages/com.best.deskclock)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.best.deskclock)]
+* [Clock You](https://github.com/you-apps/ClockYou) [[F-Droid](https://f-droid.org/packages/com.bnyro.clock)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.bnyro.clock)]
+* [Fossify Clock](https://github.com/FossifyOrg/Clock) [[F-Droid](https://f-droid.org/packages/org.fossify.clock)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.clock)]
+* [Simple Alarm Clock](https://github.com/yuriykulikov/AlarmClock) [[F-Droid](https://f-droid.org/packages/com.better.alarm)]
+* [Smart EggTimer](https://github.com/woheller69/eggtimer) [[F-Droid](https://f-droid.org/packages/org.woheller69.eggtimer)]
+
+### • Community Clients
+
+* [Dhaaga (Lite)](https://github.com/suvam0451/dhaaga) [[IzzyOnDroid](https://apt.izzysoft.de/packages/io.suvam.dhaaga.lite)]
+* [Eternity](https://codeberg.org/Bazsalanszky/Eternity) [[F-Droid](https://f-droid.org/packages/eu.toldi.infinityforlemmy)]
+* [Fedilab](https://codeberg.org/tom79/Fedilab) [[F-Droid](https://f-droid.org/packages/fr.gouv.etalab.mastodon)]
+* [Fritter](https://github.com/jonjomckay/fritter) [[F-Droid](https://f-droid.org/packages/com.jonjomckay.fritter)]
+* [Hacki](https://github.com/Livinglist/Hacki) [[F-Droid](https://f-droid.org/packages/com.jiaqifeng.hacki)]
+* [Husky](https://codeberg.org/husky/husky) [[F-Droid](https://f-droid.org/packages/su.xash.husky)]
+* [Infinity for Reddit](https://github.com/Docile-Alligator/Infinity-For-Reddit) [[F-Droid](https://f-droid.org/packages/ml.docilealligator.infinityforreddit)]
+* [Jerboa](https://github.com/dessalines/jerboa) [[F-Droid](https://f-droid.org/packages/com.jerboa)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.jerboa)]
+* [monocles social](https://codeberg.org/Arne/monocles_social) [[F-Droid](https://f-droid.org/packages/de.monocles.social)]
+* [OctoDroid](https://github.com/slapperwan/gh4a) [[F-Droid](https://f-droid.org/packages/com.gh4a)]
+* [Odysee](https://github.com/OdyseeTeam/odysee-android-floss) [[F-Droid](https://f-droid.org/packages/com.odysee.floss)]
+* [PixelDroid](https://gitlab.shinice.net/pixeldroid/PixelDroid) [[F-Droid](https://f-droid.org/packages/org.pixeldroid.app)]
+* [RedReader](https://github.com/QuantumBadger/RedReader) [[F-Droid](https://f-droid.org/packages/org.quantumbadger.redreader)]
+* [Slide](https://github.com/ccrama/Slide) [[F-Droid](https://f-droid.org/packages/me.ccrama.redditslide)]
+* [Squawker](https://github.com/j-fbriere/squawker) [[F-Droid](https://f-droid.org/packages/org.ca.squawker)]
+* [Stealth](https://gitlab.com/cosmosapps/stealth) [[F-Droid](https://f-droid.org/packages/com.cosmos.unreddit)]
+* [Thunder](https://github.com/thunder-app/thunder) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.hjiangsu.thunder)]
+* [Tusky](https://github.com/tuskyapp/Tusky) [[F-Droid](https://f-droid.org/packages/com.keylesspalace.tusky)]
+* [Twidere X](https://github.com/TwidereProject/TwidereX-Android) [[F-Droid](https://f-droid.org/packages/com.twidere.twiderex)]
+* [Voyager](https://github.com/aeharding/voyager) [[F-Droid](https://f-droid.org/packages/app.vger.voyager)]
+
+### • Contacts
+
+* [Connect You](https://github.com/you-apps/ConnectYou) [[F-Droid](https://f-droid.org/packages/com.bnyro.contacts)]
+* [Fossify Contacts](https://github.com/FossifyOrg/Contacts) [[F-Droid](https://f-droid.org/packages/org.fossify.contacts)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.contacts)]
+* [OpenContacts](https://gitlab.com/sultanahamer/OpenContacts) [[F-Droid](https://f-droid.org/packages/opencontacts.open.com.opencontacts)]
+
+### • Development
+
+* [Godot Editor](https://github.com/godotengine/godot) [[F-Droid](https://f-droid.org/packages/org.godotengine.editor.v3)]
+* [TermuC](https://github.com/RainbowC0/TermuC) [[F-Droid](https://f-droid.org/packages/cn.rbc.termuc)]
+
+### • Diary
+
+* [Daily You](https://github.com/Demizo/Daily_You) [[F-Droid](https://f-droid.org/packages/com.demizo.daily_you)]
+* [Easy Diary](https://github.com/hanjoongcho/aaf-easydiary) [[F-Droid](https://f-droid.org/packages/me.blog.korn123.easydiary)]
+
+### • Dialer
+
+* [Amadz](https://github.com/msusman1/Amadz) [[F-Droid](https://f-droid.org/packages/com.talsk.amadz)]
+* [Fossify Phone](https://github.com/FossifyOrg/Phone) [[F-Droid](https://f-droid.org/packages/org.fossify.phone)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.phone)]
+* [Koler](https://github.com/Chooloo/koler) [[F-Droid](https://f-droid.org/packages/com.chooloo.www.koler)]
+
+### • Dictionaries
+
+* [Aard 2](https://github.com/itkach/aard2-android) [[F-Droid](https://f-droid.org/packages/itkach.aard2)]
+    * [OSS-Dict](https://github.com/farfromrefug/OSS-Dict) [[F-Droid](https://f-droid.org/packages/com.akylas.aard2)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.akylas.aard2)]
+* [Ciyue](https://github.com/mumu-lhl/Ciyue) [[F-Droid](https://f-droid.org/packages/org.eu.mumulhl.ciyue)]
+* [freeDictionaryApp](https://github.com/yamin8000/freeDictionaryApp) [[F-Droid](https://f-droid.org/packages/io.github.yamin8000.owl)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/io.github.yamin8000.owl)]
+* [Notification Dictionary](https://github.com/tirkarthi/NotificationDictionary) [[F-Droid](https://f-droid.org/packages/com.xtreak.notificationdictionary)]
+* [QDict](https://github.com/marmistrz/QDict) [[F-Droid](https://f-droid.org/packages/com.annie.dictionary.fork)]
+* [QuickDic](https://github.com/rdoeffinger/Dictionary) [[F-Droid](https://f-droid.org/packages/de.reimardoeffinger.quickdic)]
+* [SilverDict](https://github.com/Crissium/SilverDict-mobile) [[F-Droid](https://f-droid.org/packages/com.gmail.blandilyte.silverdict)]
+
+### • Document & PDF Viewer
+
+* [Anx Reader](https://github.com/Anxcye/anx-reader) [[F-Droid](https://f-droid.org/packages/com.anxcye.anx_reader)]
+* [Book Reader](https://gitlab.com/axet/android-book-reader) [[F-Droid](https://f-droid.org/packages/com.github.axet.bookreader)]
+* [Book's Story](https://github.com/Acclorite/book-story) [[F-Droid](https://f-droid.org/packages/ua.acclorite.book_story)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/ua.acclorite.book_story)]
+* [KOReader](https://github.com/koreader/koreader) [[F-Droid](https://f-droid.org/packages/org.koreader.launcher.fdroid)]
+* [Librera Reader](https://github.com/foobnix/LibreraReader) [[F-Droid](https://f-droid.org/packages/com.foobnix.pro.pdf.reader)]
+* [LxReader](https://gitlab.com/coolreader-ng/lxreader) [[F-Droid](https://f-droid.org/packages/io.gitlab.coolreader_ng.lxreader.fdroid)]
+* [MJ PDF Reader](https://gitlab.com/mudlej_android/mj_pdf_reader) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.gitlab.mudlej.MjPdfReader)]
+* [MuPDF](http://mupdf.com/) [[F-Droid](https://f-droid.org/packages/com.artifex.mupdf.viewer.app)]
+* [Orion Viewer](https://github.com/max-kammerer/orion-viewer) [[F-Droid](https://f-droid.org/packages/universe.constellation.orion.viewer)]
+* [Secure PDF Viewer](https://github.com/GrapheneOS/PdfViewer)
+
+### • Document Scanner
+
+* [FairScan](https://github.com/pynicolas/FairScan) [[F-Droid](https://f-droid.org/packages/org.fairscan.app)]
+* [MakeACopy](https://github.com/egdels/makeacopy) [[F-Droid](https://f-droid.org/packages/de.schliweb.makeacopy)]
+* [OpenNoteScanner](https://github.com/ctodobom/OpenNoteScanner) [[F-Droid](https://f-droid.org/packages/com.todobom.opennotescanner)]
+* [OSS Document Scanner](https://github.com/Akylas/com.akylas.documentscanner) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.akylas.documentscanner)]
+
+### • Downloader & Manager
+
+* [Aria2App](https://github.com/devgianlu/Aria2App) [[F-Droid](https://f-droid.org/packages/com.gianlu.aria2app)]
+* [Download Navi](https://github.com/TachibanaGeneralLaboratories/download-navi) [[F-Droid](https://f-droid.org/packages/com.tachibana.downloader)]
+* [dvd](https://github.com/yausername/dvd) [[F-Droid](https://f-droid.org/packages/org.yausername.dvd)]
+* [Gopeed](https://github.com/GopeedLab/gopeed)
+* [LibreTorrent](https://github.com/proninyaroslav/libretorrent) [[F-Droid](https://f-droid.org/packages/org.proninyaroslav.libretorrent)]
+* [Myne](https://github.com/Pool-Of-Tears/Myne) [[F-Droid](https://f-droid.org/packages/com.starry.myne)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.starry.myne)]
+* [Openlib](https://github.com/dstark5/Openlib) [[F-Droid](https://f-droid.org/packages/com.app.openlib)]
+* [Seal](https://github.com/JunkFood02/Seal) [[F-Droid](https://f-droid.org/packages/com.junkfood.seal)]
+* [SpotiFlyer](https://github.com/Shabinder/SpotiFlyer) [[F-Droid](https://f-droid.org/packages/com.shabinder.spotiflyer)]
+* [Torrent Client](https://gitlab.com/axet/android-torrent-client) [[F-Droid](https://f-droid.org/packages/com.github.axet.torrentclient)]
+* [TorrServe](https://github.com/YouROK/TorrServe) [[F-Droid](https://f-droid.org/packages/ru.yourok.torrserve)]
+* [YTDLnis](https://github.com/deniscerri/ytdlnis) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.deniscerri.ytdl)]
+
+### • Email Aliases
+
+* [addy.io Android](https://github.com/anonaddy/addy-android) [[F-Droid](https://f-droid.org/packages/host.stjin.anonaddy)]
+* [SimpleLogin](https://github.com/simple-login/Simple-Login-Android) [[F-Droid](https://f-droid.org/packages/io.simplelogin.android.fdroid)]
+
+### • Email Clients
+
+* [FairEmail](https://github.com/M66B/FairEmail) [[F-Droid](https://f-droid.org/packages/eu.faircode.email)]
+* [K-9 Mail](https://github.com/thundernest/k-9) [[F-Droid](https://f-droid.org/packages/com.fsck.k9)]
+    * [monocles mail](https://codeberg.org/Arne/monocles_mail) [[F-Droid](https://f-droid.org/packages/de.monocles.mail)]
+* [Ltt.rs](https://codeberg.org/iNPUTmice/lttrs-android) [[F-Droid](https://f-droid.org/packages/rs.ltt.android)]
+* [Thunderbird](https://github.com/thunderbird/thunderbird-android) [[F-Droid](https://f-droid.org/packages/net.thunderbird.android)]
+* [Tutanota](https://github.com/tutao/tutanota) [[F-Droid](https://f-droid.org/packages/de.tutao.tutanota)]
+
+### • File Encryption
+
+* [Cryptomator](https://github.com/cryptomator/android) [[F-Droid](https://f-droid.org/packages/org.cryptomator.lite)]
+* [DroidFS](https://forge.chapril.org/hardcoresushi/DroidFS) [[F-Droid](https://f-droid.org/packages/sushi.hardcore.droidfs)]
+* [Koofr Vault](https://github.com/koofr/vault) [[F-Droid](https://f-droid.org/packages/net.koofr.vault)]
+
+### • File Manager
+
+* [Amaze](https://github.com/TeamAmaze/AmazeFileManager) [[F-Droid](https://f-droid.org/packages/com.amaze.filemanager)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.amaze.filemanager)]
+* [File Explorer Compose](https://github.com/Raival-e/File-Explorer-Compose) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.raival.compose.file.explorer)]
+* [File Manager](https://gitlab.com/axet/android-file-manager) [[F-Droid](https://f-droid.org/packages/com.github.axet.filemanager)]
+* [Fossify File Manager](https://github.com/FossifyOrg/File-Manager) [[F-Droid](https://f-droid.org/packages/org.fossify.filemanager)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.filemanager)]
+* [Ghost Commander](https://sourceforge.net/p/ghostcommander/svn/HEAD/tree) [[F-Droid](https://f-droid.org/packages/com.ghostsq.commander)]
+* [Little File Explorer](https://github.com/martinmimigames/little-file-explorer) [[F-Droid](https://f-droid.org/packages/com.martinmimigames.simplefileexplorer)]
+* [Material Files](https://github.com/zhanghai/MaterialFiles) [[F-Droid](https://f-droid.org/packages/me.zhanghai.android.files)]
+
+### • File Sharing
+
+* [Custom Uploader](https://github.com/SrS2225a/custom_uploader) [[F-Droid](https://f-droid.org/packages/com.nyx.custom_uploader)]
+* [Device Connect](https://github.com/cyanomiko/dcnnt-android) [[F-Droid](https://f-droid.org/packages/net.dcnnt)]
+* [Filester](https://github.com/rouzbehzarei/filester) [[F-Droid](https://f-droid.org/packages/com.roozbehzarei.filester)]
+* [FTPClient](https://codeberg.org/qwerty287/ftpclient) [[F-Droid](https://f-droid.org/packages/de.qwerty287.ftpclient)]
+* [KDE Connect](https://invent.kde.org/network/kdeconnect-android) [[F-Droid](https://f-droid.org/packages/org.kde.kdeconnect_tp)]
+* [LocalSend](https://github.com/localsend/localsend) [[F-Droid](https://f-droid.org/packages/org.localsend.localsend_app)]
+* [ShareX](https://github.com/akanshSirohi/ShareX) [[F-Droid](https://f-droid.org/packages/com.akansh.fileserversuit)]
+* [Sharik](https://github.com/marchellodev/sharik) [[F-Droid](https://f-droid.org/packages/dev.marchello.sharik)]
+* [Sharing](https://github.com/Ammar64/Sharing) [[F-Droid](https://f-droid.org/packages/com.ammar.sharing)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.ammar.sharing)]
+* [Snapdrop & PairDrop for Android](https://github.com/fm-sys/snapdrop-android) [[F-Droid](https://f-droid.org/packages/com.fmsys.snapdrop)]
+* [Warpinator](https://github.com/slowscript/warpinator-android) [[F-Droid](https://f-droid.org/packages/slowscript.warpinator)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/slowscript.warpinator)]
+* [Zorin Connect](https://github.com/ZorinOS/zorin-connect-android) [[F-Droid](https://f-droid.org/packages/com.zorinos.zorin_connect)]
+
+### • Finance
+
+* [Arru](https://github.com/KSSidll/Arru) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.kssidll.arru)]
+* [CryptoTracker](https://github.com/judemont/cryptotracker) [[IzzyOnDroid](https://apt.izzysoft.de/packages/jdm.apps.cryptotracker)]
+* [Currencies](https://github.com/sal0max/currencies) [[F-Droid](https://f-droid.org/packages/de.salomax.currencies)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.salomax.currencies)]
+* [FDTracker](https://github.com/Abhay-cloud/Fixed-Deposit-Tracker) [[IzzyOnDroid](https://apt.izzysoft.de/packages/dev.abhaycloud.fdtracker)]
+* [GreenStash](https://github.com/Pool-Of-Tears/GreenStash) [[F-Droid](https://f-droid.org/packages/com.starry.greenstash)]
+* [My Expenses](https://github.com/mtotschnig/MyExpenses) [[F-Droid](https://f-droid.org/packages/org.totschnig.myexpenses)]
+* [Oinkoin](https://github.com/emavgl/oinkoin) [[F-Droid](https://f-droid.org/packages/com.github.emavgl.piggybankpro)]
+* [Recurring Expense Tracker](https://github.com/DennisBauer/RecurringExpenseTracker) [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.dbauer.expensetracker)]
+
+### • Firewall
+
+* [AFWall+](https://github.com/ukanth/afwall) [[F-Droid](https://f-droid.org/packages/dev.ukanth.ufirewall)]
+* [De1984](https://github.com/dorumrr/de1984) [[F-Droid](https://f-droid.org/packages/io.github.dorumrr.de1984)]
+* [Karma Firewall](https://github.com/nightflame2/karma-firewall) [[F-Droid](https://f-droid.org/packages/net.stargw.fok)]
+* [NetGuard](https://github.com/M66B/NetGuard) [[F-Droid](https://f-droid.org/packages/eu.faircode.netguard)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/eu.faircode.netguard)]
+* [Rethink DNS + Firewall](https://github.com/celzero/rethink-app) [[F-Droid](https://f-droid.org/packages/com.celzero.bravedns)]
+
+### • Flashcard
+
+* [AnkiDroid](https://github.com/ankidroid/Anki-Android) [[F-Droid](https://f-droid.org/packages/com.ichi2.anki)]
+* [Flash Deck](https://github.com/rh-id/a-flash-deck) [[F-Droid](https://f-droid.org/packages/m.co.rh.id.a_flash_deck)]
+* [ForgetMeNot](https://github.com/tema6120/ForgetMeNot) [[F-Droid](https://f-droid.org/packages/com.odnovolov.forgetmenot)]
+* [QuizFlow](https://github.com/judemont/quizflow) [[IzzyOnDroid](https://apt.izzysoft.de/packages/jdm.apps.quizflow)]
+
+### • Flashlight
+
+* [FlashDim](https://github.com/cyb3rko/flashdim) [[F-Droid](https://f-droid.org/packages/com.cyb3rko.flashdim)]
+* [Flashy](https://github.com/Crazy-Marvin/Flashy) [[F-Droid](https://f-droid.org/packages/rocks.poopjournal.flashy)]
+* [Lumolight](https://github.com/BitMavrick/Lumolight) [[F-Droid](https://f-droid.org/packages/com.bitmavrick.lumolight)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.bitmavrick.lumolight)]
+
+### • Graphics
+
+* [Fossify Paint](https://github.com/FossifyOrg/Paint) [[F-Droid](https://f-droid.org/packages/org.fossify.paint)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.paint)]
+* [FreePaint](https://github.com/pastthepixels/FreePaint) [[F-Droid](https://f-droid.org/packages/io.github.pastthepixels.freepaint)]
+* [Krita](https://invent.kde.org/graphics/krita) [[F-Droid](https://f-droid.org/packages/org.krita)]
+* [Pocket Paint](https://github.com/Catrobat/Paintroid) [[F-Droid](https://f-droid.org/packages/org.catrobat.paintroid)]
+* [PxerStudio](https://github.com/BennyKok/PxerStudio) [[F-Droid](https://f-droid.org/packages/com.benny.pxerstudio)]
+* [Tux Paint](https://github.com/tux4kids/Tuxpaint-Android) [[F-Droid](https://f-droid.org/packages/org.tuxpaint)]
+
+### • Habit Tracker
+
+* [Grit](https://github.com/shub39/Grit) [[F-Droid](https://f-droid.org/packages/com.shub39.grit)]
+* [Loop Habit Tracker](https://github.com/iSoron/uhabits) [[F-Droid](https://f-droid.org/packages/org.isoron.uhabits)]
+* [Sobriety](https://github.com/KiARC/Sobriety) [[F-Droid](https://f-droid.org/packages/com.katiearose.sobriety)]
+* [Table Habit](https://github.com/FriesI23/mhabit) [[F-Droid](https://f-droid.org/packages/io.github.friesi23.mhabit)]
+
+### • Icon Packs
+
+* [Arcticons](https://github.com/Arcticons-Team/Arcticons) [[F-Droid](https://f-droid.org/packages/com.donnnno.arcticons)]
+* [Delta Icon Pack](https://delta-icons.github.io) [[F-Droid](https://f-droid.org/packages/website.leifs.delta.foss)]
+* [Lawnicons](https://github.com/LawnchairLauncher/lawnicons) [[IzzyOnDroid](https://apt.izzysoft.de/packages/app.lawnchair.lawnicons)]
+
+### • Image Manipulation
+
+* [Easy Watermark](https://github.com/rosuH/EasyWatermark) [[F-Droid](https://f-droid.org/packages/me.rosuh.easywatermark)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/me.rosuh.easywatermark)]
+* [Exif Thumbnail Adder](https://github.com/tenzap/exif-thumbnail-adder) [[F-Droid](https://f-droid.org/packages/com.exifthumbnailadder.app)]
+* [FFShare](https://github.com/caydey/ffshare) [[F-Droid](https://f-droid.org/packages/com.caydey.ffshare)]
+* [Image Toolbox](https://github.com/T8RIN/ImageToolbox) [[F-Droid](https://f-droid.org/packages/ru.tech.imageresizershrinker)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/ru.tech.imageresizershrinker)]
+* [ImagePipe](https://codeberg.org/Starfish/Imagepipe) [[F-Droid](https://f-droid.org/packages/de.kaffeemitkoffein.imagepipe)]
+* [Metadata Remover](https://github.com/Crazy-Marvin/MetadataRemover) [[F-Droid](https://f-droid.org/packages/rocks.poopjournal.metadataremover)]
+* [PrivacyBlur](https://github.com/MATHEMA-GmbH/privacyblur) [[F-Droid](https://f-droid.org/packages/de.mathema.privacyblur)]
+* [Scrambled Exif](https://gitlab.com/juanitobananas/scrambled-exif) [[F-Droid](https://f-droid.org/packages/com.jarsilio.android.scrambledeggsif)]
+
+### • Image Viewer & Gallery
+
+* [Aves](https://github.com/deckerst/aves) [[F-Droid](https://f-droid.org/packages/deckers.thibault.aves.libre)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/deckers.thibault.aves)]
+* [Ente Photos](https://github.com/ente-io/ente) [[F-Droid](https://f-droid.org/packages/io.ente.photos.fdroid)]
+* [Fossify Gallery](https://github.com/FossifyOrg/Gallery) [[F-Droid](https://f-droid.org/packages/org.fossify.gallery)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.gallery)]
+* [Gallery](https://github.com/IacobIonut01/Gallery) [[F-Droid](https://f-droid.org/packages/com.dot.gallery)]
+* [Stingle Photos](https://github.com/stingle/stingle-photos-android) [[F-Droid](https://f-droid.org/packages/org.stingle.photos)]
+
+### • Keyboard
+
+* [8VIM](https://github.com/flide/8VIM) [[F-Droid](https://f-droid.org/packages/inc.flide.vi8)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/inc.flide.vi8)]
+* [AnySoftKeyboard](https://anysoftkeyboard.github.io/) [[F-Droid](https://f-droid.org/packages/com.menny.android.anysoftkeyboard)]
+* [fcitx5-android](https://github.com/fcitx5-android/fcitx5-android) [[F-Droid](https://f-droid.org/packages/org.fcitx.fcitx5.android)]
+* [FlorisBoard](https://github.com/florisboard/florisboard) [[F-Droid](https://f-droid.org/packages/dev.patrickgold.florisboard)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/dev.patrickgold.florisboard)]  
+    FlorisBoard Beta:  [[IzzyOnDroid](https://apt.izzysoft.de/packages/dev.patrickgold.florisboard.beta)]
+* [Fossify Keyboard](https://github.com/FossifyOrg/Keyboard) [[F-Droid](https://f-droid.org/packages/org.fossify.keyboard)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.keyboard)]
+* [FutharkBoard](https://github.com/DrMaxNix/futharkboard) [[F-Droid](https://f-droid.org/packages/de.drmaxnix.futharkboard)]
+* [Hacker's Keyboard](https://github.com/klausw/hackerskeyboard) [[F-Droid](https://f-droid.org/packages/org.pocketworkstation.pckeyboard)]
+* [HeliBoard](https://github.com/Helium314/HeliBoard) [[F-Droid](https://f-droid.org/packages/helium314.keyboard)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/helium314.keyboard)]
+* [Indic Keyboard](https://gitlab.com/indicproject/indic-keyboard) [[F-Droid](https://f-droid.org/packages/org.smc.inputmethod.indic)]
+* [KryptEY](https://github.com/amnesica/KryptEY) [[F-Droid](https://f-droid.org/packages/com.amnesica.kryptey)]
+* [OpenBoard](https://github.com/dslul/openboard) [[F-Droid](https://f-droid.org/packages/org.dslul.openboard.inputmethod.latin)]
+* [Simple Keyboard](https://github.com/rkkr/simple-keyboard) [[F-Droid](https://f-droid.org/packages/rkr.simplekeyboard.inputmethod)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/rkr.simplekeyboard.inputmethod)]
+* [Stroke Input Method (筆畫輸入法)](https://github.com/stroke-input/stroke-input-android) [[F-Droid](https://f-droid.org/packages/io.github.yawnoc.strokeinput)]
+* [Thumb-Key](https://github.com/dessalines/thumb-key) [[F-Droid](https://f-droid.org/packages/com.dessalines.thumbkey)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.dessalines.thumbkey)]
+* [Traditional T9](https://github.com/sspanak/tt9) [[F-Droid](https://f-droid.org/packages/io.github.sspanak.tt9)]
+* [Trime](https://github.com/osfans/trime) [[F-Droid](https://f-droid.org/packages/com.osfans.trime)]
+* [Unexpected Keyboard](https://github.com/Julow/Unexpected-Keyboard) [[F-Droid](https://f-droid.org/packages/juloo.keyboard2)]
+
+### • Launcher & Desktop
+
+* [BlissLauncher](https://gitlab.e.foundation/e/apps/BlissLauncher) [[F-Droid](https://f-droid.org/packages/foundation.e.blisslauncher)]
+* [Discreet Launcher](https://github.com/falzonv/discreet-launcher) [[F-Droid](https://f-droid.org/packages/com.vincent_falzon.discreetlauncher)]
+* [Easy Launcher](https://github.com/DroidWorksStudio/EasyLauncher) [[F-Droid](https://f-droid.org/packages/app.easy.launcher)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/app.easy.launcher)]
+* [Emerald Launcher](https://github.com/HenriDellal/emerald) [[F-Droid](https://f-droid.org/packages/ru.henridellal.emerald)]
+* [Fossify Launcher](https://github.com/FossifyOrg/Launcher) [[F-Droid](https://f-droid.org/packages/org.fossify.home)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.home)]
+* [Hex Launcher](https://github.com/MrMannWood/launcher) [[F-Droid](https://f-droid.org/packages/com.mrmannwood.hexlauncher)]
+* [KISS](http://kisslauncher.com/) [[F-Droid](https://f-droid.org/packages/fr.neamar.kiss)]
+* [Kvaesitso](https://kvaesitso.mm20.de/) [[F-Droid](https://f-droid.org/packages/de.mm20.launcher2.release)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.mm20.launcher2.release)]
+* [LaunchTime](https://github.com/quaap/LaunchTime) [[F-Droid](https://f-droid.org/packages/com.quaap.launchtime)]
+* [Lawnchair](https://github.com/LawnchairLauncher/lawnchair) [[IzzyOnDroid](https://apt.izzysoft.de/packages/app.lawnchair)]
+* [Lunar Launcher](https://github.com/iamrasel/lunar-launcher) [[F-Droid](https://f-droid.org/packages/rasel.lunar.launcher)]
+* [Neo-Launcher](https://github.com/NeoApplications/Neo-Launcher) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.saggitt.omega)]
+* [Olauncher](https://github.com/tanujnotes/Olauncher) [[F-Droid](https://f-droid.org/packages/app.olauncher)]
+* [OpenLauncher](https://github.com/BennyKok/OpenLauncher) [[F-Droid](https://f-droid.org/packages/com.benny.openlauncher)]
+* [PaperLaunch](https://github.com/devmil/PaperLaunch) [[F-Droid](https://f-droid.org/packages/de.devmil.paperlaunch)]
+* [Pie Launcher](https://github.com/markusfisch/PieLauncher) [[F-Droid](https://f-droid.org/packages/de.markusfisch.android.pielauncher)]
+* [YAM Launcher](https://codeberg.org/ottoptj/yamlauncher) [[F-Droid](https://f-droid.org/packages/eu.ottop.yamlauncher)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/eu.ottop.yamlauncher)]
+* [µLauncher](https://launcher.jrpie.de/) [[F-Droid](https://f-droid.org/packages/de.jrpie.android.launcher)]
+
+### • Maps & Navigation
+
+* [CoMaps](https://codeberg.org/comaps/comaps) [[F-Droid](https://f-droid.org/packages/app.comaps.fdroid)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/app.comaps)]
+* [Compass](https://github.com/Kr0oked/Compass) [[F-Droid](https://f-droid.org/packages/com.bobek.compass)]
+* [Geo Share](https://github.com/jakubvalenta/geoshare) [[F-Droid](https://f-droid.org/packages/page.ooooo.geoshare)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/page.ooooo.geoshare)]
+* [MBCompass](https://github.com/MubarakNative/MBCompass) [[F-Droid](https://f-droid.org/packages/com.mubarak.mbcompass)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.mubarak.mbcompass)]
+* [OpenTopoMap Viewer](https://github.com/Pygmalion69/OpenTopoMapViewer) [[F-Droid](https://f-droid.org/packages/org.nitri.opentopo)]
+* [Organic Maps](https://github.com/organicmaps/organicmaps) [[F-Droid](https://f-droid.org/packages/app.organicmaps)]
+* [OsmAnd~](http://osmand.net/) [[F-Droid](https://f-droid.org/packages/net.osmand.plus)]
+* [Trail Sense](https://github.com/kylecorry31/Trail-Sense) [[F-Droid](https://f-droid.org/packages/com.kylecorry.trail_sense)]
+* [Trekarta](https://github.com/andreynovikov/trekarta) [[F-Droid](https://f-droid.org/packages/mobi.maptrek)]
+* [Vespucci](https://github.com/MarcusWolschon/osmeditor4android) [[F-Droid](https://f-droid.org/packages/de.blau.android)]
+* [μlogger](https://github.com/bfabiszewski/ulogger-android) [[F-Droid](https://f-droid.org/packages/net.fabiszewski.ulogger)]
+
+### • Media Frontends
+
+* [Clipious](https://github.com/lamarios/clipious) [[F-Droid](https://f-droid.org/packages/com.github.lamarios.clipious)]
+* [FreeTube Android](https://github.com/MarmadileManteater/FreeTubeAndroid) [[IzzyOnDroid](https://apt.izzysoft.de/packages/io.freetubeapp.freetube)]
+* [Jellyfin](https://github.com/jellyfin/jellyfin-android) [[F-Droid](https://f-droid.org/packages/org.jellyfin.mobile)]
+* [LibreTube](https://github.com/libre-tube/LibreTube) [[F-Droid](https://f-droid.org/packages/com.github.libretube)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.github.libretube)]
+* [Materialious](https://github.com/Materialious/Materialious) [[F-Droid](https://f-droid.org/packages/us.materialio.app)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/us.materialio.app)]
+* [NewPipe](https://github.com/TeamNewPipe/NewPipe) [[F-Droid](https://f-droid.org/packages/org.schabi.newpipe)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.schabi.newpipe)]
+    * [PipePipe](https://codeberg.org/NullPointerException/PipePipe) [[F-Droid](https://f-droid.org/packages/InfinityLoop1309.NewPipeEnhanced)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/InfinityLoop1309.NewPipeEnhanced)]
+    * [Tubular](https://github.com/polymorphicshade/Tubular) [[F-Droid](https://f-droid.org/packages/org.polymorphicshade.tubular)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.polymorphicshade.tubular)]
+* [SkyTube](https://github.com/ram-on/SkyTube) [[F-Droid](https://f-droid.org/packages/free.rm.skytube.oss)]
+* [Twire](https://github.com/twireapp/Twire) [[F-Droid](https://f-droid.org/packages/com.perflyst.twire)]
+* [Xtra](https://github.com/crackededed/Xtra) [[F-Droid](https://f-droid.org/packages/com.github.andreyasadchy.xtra)]
+
+### • Messaging
+
+* [blabber.im](https://codeberg.org/kriztan/blabber.im) [[F-Droid](https://f-droid.org/packages/de.pixart.messenger)]
+* [Briar](https://code.briarproject.org/briar/briar) [[F-Droid](https://f-droid.org/packages/org.briarproject.briar.android)]
+* [Conversations](https://github.com/siacs/Conversations) [[F-Droid](https://f-droid.org/packages/eu.siacs.conversations)]
+    * [another.im](https://dev.narayana.im/narayana/anotherim) [[F-Droid](https://f-droid.org/packages/im.narayana.another)]
+    * [Cheogram](https://git.singpolyma.net/cheogram-android) [[F-Droid](https://f-droid.org/packages/com.cheogram.android)]
+    * [monocles chat](https://codeberg.org/monocles/monocles_chat) [[F-Droid](https://f-droid.org/packages/de.monocles.chat)]
+* [Element X](https://github.com/vector-im/element-x-android) [[F-Droid](https://f-droid.org/packages/io.element.android.x)]
+    * [SchildiChat Next](https://github.com/SchildiChat/schildichat-android-next) [[F-Droid](https://f-droid.org/packages/chat.schildi.android)]
+* [FluffyChat](https://github.com/krille-chan/fluffychat) [[F-Droid](https://f-droid.org/packages/chat.fluffy.fluffychat)]
+* [Jami](https://git.jami.net/savoirfairelinux/jami-client-android) [[F-Droid](https://f-droid.org/packages/cx.ring)]
+* [Jitsi Meet](https://github.com/jitsi/jitsi-meet) [[F-Droid](https://f-droid.org/packages/org.jitsi.meet)]
+* [Launch Chat](https://github.com/vinaygopinath/launch-chat) [[F-Droid](https://f-droid.org/packages/org.vinaygopinath.launchchat)]
+* [Manyverse](https://gitlab.com/staltz/manyverse) [[F-Droid](https://f-droid.org/packages/se.manyver)]
+* [Mastodon](https://github.com/mastodon/mastodon-android) [[F-Droid](https://f-droid.org/packages/org.joinmastodon.android)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.joinmastodon.android)]
+    * [Megalodon](https://github.com/sk22/megalodon)
+    * [Moshidon](https://github.com/LucasGGamerM/moshidon) [[F-Droid](https://f-droid.org/packages/org.joinmastodon.android.moshinda)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.joinmastodon.android.moshinda)]
+* [Meshenger](https://github.com/meshenger-app/meshenger-android) [[F-Droid](https://f-droid.org/packages/d.d.meshenger)]
+* [Molly](https://github.com/mollyim/mollyim-android)
+* [Mumla](https://gitlab.com/quite/mumla) [[F-Droid](https://f-droid.org/packages/se.lublin.mumla)]
+* [SchildiChat](https://github.com/SchildiChat/SchildiChat-android) [[F-Droid](https://f-droid.org/packages/de.spiritcroc.riotx)]
+* [Session F-Droid](https://github.com/oxen-io/session-android) [[F-Droid](https://f-droid.org/packages/network.loki.messenger.fdroid)]
+* [Signal-Foss](https://github.com/tw-hx/Signal-Android)
+* [SimpleX Chat](https://github.com/simplex-chat/simplex-chat) [[F-Droid](https://f-droid.org/packages/chat.simplex.app)]
+* [Telegram-FOSS](https://github.com/Telegram-FOSS-Team/Telegram-FOSS) [[F-Droid](https://f-droid.org/packages/org.telegram.messenger)]
+    * [Forkgram](https://github.com/Forkgram/TelegramAndroid) [[F-Droid](https://f-droid.org/packages/org.forkgram.messenger)]
+    * [Mercurygram](https://github.com/drizzt/Mercurygram) [[F-Droid](https://f-droid.org/packages/it.belloworld.mercurygram)]
+    * [Telegram Monet](https://github.com/mi-g-alex/Telegram-Monet)
+* [Threema Libre](https://github.com/threema-ch/threema-android) [[F-Droid](https://f-droid.org/packages/ch.threema.app.libre)]
+* [WiFi Walkie Talkie](https://github.com/js-labs/WalkieTalkie) [[F-Droid](https://f-droid.org/packages/org.jsl.wfwt)]
+* [Wire](https://github.com/wireapp/wire-android) [[F-Droid](https://f-droid.org/packages/com.wire)]
+
+### • Miscellaneous
+
+* [Audio Recorder](https://gitlab.com/axet/android-audio-recorder)
+* [Call Recorder](https://gitlab.com/axet/android-call-recorder) [[F-Droid](https://f-droid.org/packages/com.github.axet.callrecorder)]
+* [Coffee](https://github.com/mueller-ma/Coffee) [[F-Droid](https://f-droid.org/packages/com.github.muellerma.coffee)]
+* [Cuppa](https://github.com/ncosgray/cuppa_mobile) [[F-Droid](https://f-droid.org/packages/com.nathanatos.Cuppa)]
+* [Fossify Voice Recorder](https://github.com/FossifyOrg/Voice-Recorder) [[F-Droid](https://f-droid.org/packages/org.fossify.voicerecorder)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.voicerecorder)]
+* [Gadgetbridge](https://codeberg.org/Freeyourgadget/Gadgetbridge) [[F-Droid](https://f-droid.org/packages/nodomain.freeyourgadget.gadgetbridge)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/nodomain.freeyourgadget.gadgetbridge)]
+* [Goodtime](https://github.com/goodtime-productivity/Goodtime) [[F-Droid](https://f-droid.org/packages/com.apps.adrcotfas.goodtime)]
+* [Just Delete Me](https://github.com/AmanoTeam/JustDeleteMe) [[F-Droid](https://f-droid.org/packages/com.amanoteam.kurt)]
+* [LinkHub](https://github.com/AmrDeveloper/LinkHub) [[F-Droid](https://f-droid.org/packages/com.amrdeveloper.linkhub)]
+* [Moonlight](https://github.com/moonlight-stream/moonlight-android) [[F-Droid](https://f-droid.org/packages/com.limelight)]
+* [Motion Eye](https://github.com/JairajJangle/motioneye-android) [[F-Droid](https://f-droid.org/packages/com.jairaj.janglegmail.motioneye)]
+* [Openreads](https://github.com/mateusz-bak/openreads) [[F-Droid](https://f-droid.org/packages/software.mdev.bookstracker)]
+* [RustDesk](https://github.com/rustdesk/rustdesk) [[F-Droid](https://f-droid.org/packages/com.carriez.flutter_hbb)]
+* [Simple Time Tracker](https://github.com/Razeeman/Android-SimpleTimeTracker) [[F-Droid](https://f-droid.org/packages/com.razeeman.util.simpletimetracker)]
+* [Stay Put](https://codeberg.org/y20k/stayput) [[F-Droid](https://f-droid.org/packages/org.y20k.stayput)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.y20k.stayput)]
+
+### • Movie & Cinema
+
+* [MovieFlix](https://github.com/shalenMathew/MovieFlix_App) [[F-Droid](https://f-droid.org/packages/com.shalenmathew.movieflix)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.shalenmathew.movieflix)]
+* [ShowCase](https://github.com/WirelessAlien/MovieDB) [[F-Droid](https://f-droid.org/packages/com.wirelessalien.android.moviedb)]
+
+### • Music
+
+* [Audile](https://github.com/aleksey-saenko/MusicRecognizer) [[F-Droid](https://f-droid.org/packages/com.mrsep.musicrecognizer)]
+* [Audio Spectrum Analyzer](https://github.com/woheller69/audio-analyzer-for-android) [[F-Droid](https://f-droid.org/packages/org.woheller69.audio_analyzer_for_android)]
+* [ChordReader 2](https://github.com/AndInTheClouds/chordreader2) [[F-Droid](https://f-droid.org/packages/org.hollowbamboo.chordreader2)]
+* [Chronal](https://github.com/cognitivitydev/Chronal) [[F-Droid](https://f-droid.org/packages/dev.cognitivity.chronal)]
+* [GuitarFretboardTrainer](https://gitlab.com/pandagoespoop/guitarfretboardtrainer) [[F-Droid](https://f-droid.org/packages/com.simonslater.guitarfretboardtrainer)]
+* [Helio](https://github.com/helio-fm/helio-sequencer) [[F-Droid](https://f-droid.org/packages/fm.helio)]
+* [Hexpress](https://github.com/jmiskovic/hexpress) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.castlewrath.hexpress)]
+* [Liedgutverzeichnis](https://codeberg.org/LiedgutDatenbank/Liedgutverzeichnis) [[F-Droid](https://f-droid.org/packages/de.thefeiter.liedgutverzeichnis)]
+* [Metronome](https://github.com/thetwom/toc2) [[F-Droid](https://f-droid.org/packages/de.moekadu.metronome)]
+* [Musekit](https://github.com/Kwasow/Musekit) [[F-Droid](https://f-droid.org/packages/com.kwasow.musekit)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.kwasow.musekit)]
+* [Noice](https://github.com/ashutoshgngwr/noice) [[F-Droid](https://f-droid.org/packages/com.github.ashutoshgngwr.noice)]
+* [Noten Learner](https://github.com/MelvilQ/noten-lernen)
+* [Practice Suite](https://codeberg.org/Berker/practice_suite) [[F-Droid](https://f-droid.org/packages/com.berkersen.practicesuite)]
+* [Rush](https://github.com/shub39/Rush) [[F-Droid](https://f-droid.org/packages/com.shub39.rush)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.shub39.rush)]
+* [Tack](https://github.com/patzly/tack-android) [[IzzyOnDroid](https://apt.izzysoft.de/packages/xyz.zedler.patrick.tack)]
+* [Tuner](https://github.com/thetwom/Tuner) [[F-Droid](https://f-droid.org/packages/de.moekadu.tuner)]
+
+### • Music & Audio Player
+
+* [Auxio](https://github.com/OxygenCobalt/Auxio) [[F-Droid](https://f-droid.org/packages/org.oxycblt.auxio)]
+* [Bloomee](https://github.com/HemantKArya/BloomeeTunes)[[IzzyOnDroid](https://apt.izzysoft.de/packages/ls.bloomee.musicplayer)]
+* [Booming Music](https://github.com/mardous/BoomingMusic) [[F-Droid](https://f-droid.org/packages/com.mardous.booming)]
+* [CuteMusic](https://github.com/sosauce/CuteMusic)[[F-Droid](https://f-droid.org/packages/com.sosauce.cutemusic)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.sosauce.cutemusic)]
+* [Dialog Music Player](https://github.com/VishnuSanal/DialogMusicPlayer) [[F-Droid](https://f-droid.org/packages/phone.vishnu.dialogmusicplayer)]
+* [Fossify Music Player](https://github.com/FossifyOrg/Music-Player) [[F-Droid](https://f-droid.org/packages/org.fossify.musicplayer)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.musicplayer)]
+* [Gramophone](https://github.com/AkaneTan/Gramophone) [[F-Droid](https://f-droid.org/packages/org.akanework.gramophone)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.akanework.gramophone)]
+* [Harmony Music](https://github.com/anandnet/Harmony-Music) [[F-Droid](https://f-droid.org/packages/com.anandnet.harmonymusic)]
+* [InnerTune](https://github.com/z-huang/InnerTune) [[F-Droid](https://f-droid.org/packages/com.zionhuang.music)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.zionhuang.music)]
+    * [InnerTune (Fork)](https://github.com/Malopieds/InnerTune) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.malopieds.innertune)]
+    * [Outer Tune](https://github.com/DD3Boh/OuterTune) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.dd3boh.outertune)]
+* [Kreate](https://github.com/knighthat/Kreate) [[F-Droid](https://f-droid.org/packages/me.knighthat.kreate)]
+* [little music player](https://github.com/martinmimigames/little-music-player) [[F-Droid](https://f-droid.org/packages/com.martinmimigames.littlemusicplayer)]
+* [Metro](https://github.com/MuntashirAkon/Metro) [[F-Droid](https://f-droid.org/packages/io.github.muntashirakon.Music)]
+* [Metrolist](https://github.com/mostafaalagamy/Metrolist) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.metrolist.music)]
+* [Musify](https://github.com/gokadzev/Musify) [[F-Droid](https://f-droid.org/packages/com.gokadzev.musify.fdroid)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.gokadzev.musify)]
+* [Odeon](https://github.com/thibseisel/android-odeon) [[F-Droid](https://f-droid.org/packages/fr.nihilus.music)]
+* [Odyssey](https://github.com/gateship-one/odyssey) [[F-Droid](https://f-droid.org/packages/org.gateshipone.odyssey)]
+* [phiola](https://github.com/stsaz/phiola) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.github.stsaz.phiola)]
+* [Phonograph Plus](https://github.com/chr56/Phonograph_Plus) [[F-Droid](https://f-droid.org/packages/player.phonograph.plus)]
+* [RadioDroid](https://github.com/segler-alex/RadioDroid) [[F-Droid](https://f-droid.org/packages/net.programmierecke.radiodroid2)]
+* [SimpMusic](https://github.com/maxrave-dev/SimpMusic) [[F-Droid](https://f-droid.org/packages/com.maxrave.simpmusic)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.maxrave.simpmusic)]
+* [SongTube](https://github.com/SongTube/SongTube-App)
+* [SpMp](https://github.com/toasterofbread/spmp) [[F-Droid](https://f-droid.org/packages/com.toasterofbread.spmp)]
+* [Spotube](https://github.com/KRTirtho/spotube) [[F-Droid](https://f-droid.org/packages/oss.krtirtho.spotube)]
+* [Tempus](https://github.com/eddyizm/tempus) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.eddyizm.degoogled.tempus)]
+* [Transistor](https://codeberg.org/y20k/transistor) [[F-Droid](https://f-droid.org/packages/org.y20k.transistor)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.y20k.transistor)]
+* [Vanilla Music](https://vanilla-music.github.io/) [[F-Droid](https://f-droid.org/packages/ch.blinkenlights.android.vanilla)]
+* [Vinyl Music Player](https://github.com/AdrienPoupa/VinylMusicPlayer) [[F-Droid](https://f-droid.org/packages/com.poupa.vinylmusicplayer)]
+
+### • Notes
+
+* [Easy Notes](https://github.com/Kin69/EasyNotes) [[F-Droid](https://f-droid.org/packages/com.kin.easynotes)]
+* [Fossify Notes](https://github.com/FossifyOrg/Notes) [[F-Droid](https://f-droid.org/packages/org.fossify.notes)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.notes)]
+* [Joplin](https://github.com/laurent22/joplin) [[F-Droid](https://f-droid.org/packages/net.cozic.joplin)]
+* [jtx Board](https://github.com/TechbeeAT/jtxBoard) [[F-Droid](https://f-droid.org/packages/at.techbee.jtx)]
+* [Linwood Butterfly](https://github.com/LinwoodCloud/butterfly) [[F-Droid](https://f-droid.org/packages/dev.linwood.butterfly.nightly)]
+* [Local Material Notes](https://github.com/maelchiotti/LocalMaterialNotes) [[F-Droid](https://f-droid.org/packages/com.maelchiotti.localmaterialnotes)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.maelchiotti.localmaterialnotes)]
+* [Logseq](https://github.com/logseq/logseq) [[F-Droid](https://f-droid.org/packages/com.logseq.app)]
+* [Markor](https://github.com/gsantner/markor) [[F-Droid](https://f-droid.org/packages/net.gsantner.markor)]
+* [Mavinote](https://github.com/bwqr/mavinote) [[F-Droid](https://f-droid.org/packages/com.bwqr.mavinote)]
+* [Memento](https://github.com/mwarning/Memento) [[F-Droid](https://f-droid.org/packages/de.mwarning.memento)]
+* [My Brain](https://github.com/mhss1/MyBrain) [[F-Droid](https://f-droid.org/packages/com.mhss.app.mybrain)]
+* [neutriNote](https://github.com/appml/neutrinote) [[F-Droid](https://f-droid.org/packages/com.appmindlab.nano)]
+* [Nextcloud Notes](https://github.com/nextcloud/notes-android) [[F-Droid](https://f-droid.org/packages/it.niedermann.owncloud.notes)]
+* [Notally](https://github.com/OmGodse/Notally) [[F-Droid](https://f-droid.org/packages/com.omgodse.notally)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.omgodse.notally)]
+* [NotallyX](https://github.com/PhilKes/NotallyX) [[F-Droid](https://f-droid.org/packages/com.philkes.notallyx)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.philkes.notallyx)]
+* [Notely Voice](https://github.com/tosinonikute/NotelyVoice) [[F-Droid](https://f-droid.org/packages/com.module.notelycompose.android)]
+* [Notesnook](https://github.com/streetwriters/notesnook) [[F-Droid](https://f-droid.org/packages/com.streetwriters.notesnook)]
+* [Noto](https://github.com/alialbaali/Noto) [[F-Droid](https://f-droid.org/packages/com.noto)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.noto)]
+* [Omni-Notes](https://federicoiosue.github.io/Omni-Notes/) [[F-Droid](https://f-droid.org/packages/it.feio.android.omninotes.foss)]
+* [Privacy Friendly Notes](https://github.com/SecUSo/privacy-friendly-notes) [[F-Droid](https://f-droid.org/packages/org.secuso.privacyfriendlynotes)]
+* [Quillpad](https://github.com/quillpad/quillpad) [[F-Droid](https://f-droid.org/packages/io.github.quillpad)]
+* [Saber](https://github.com/adil192/saber) [[F-Droid](https://f-droid.org/packages/com.adilhanney.saber)]
+* [Simple Material Notes](https://github.com/RafhaanShah/Simple-Notes) [[F-Droid](https://f-droid.org/packages/com.rafapps.simplenotes)]
+* [Standard Notes](https://github.com/standardnotes/app) [[F-Droid](https://f-droid.org/packages/com.standardnotes)]
+
+### • Office
+
+* [Collabora Office](https://www.collaboraoffice.com/solutions/collabora-office-android-ios/)
+* [LibreOffice Viewer](https://www.libreoffice.org/download/android-viewer/) [[F-Droid](https://f-droid.org/packages/org.documentfoundation.libreoffice)]
+* [OpenDocument](https://github.com/opendocument-app/OpenDocument.droid) [[F-Droid](https://f-droid.org/packages/at.tomtasche.reader)]
+
+### • Password & Authentication
+
+* [Aegis](https://getaegis.app/) [[F-Droid](https://f-droid.org/packages/com.beemdevelopment.aegis)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.beemdevelopment.aegis)]
+* [AuthenticatorPro](https://github.com/jamie-mh/AuthenticatorPro) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.stratumauth.app)]
+* [AuthPass](https://github.com/authpass/authpass) [[F-Droid](https://f-droid.org/packages/design.codeux.authpass.fdroid)]
+* [Bitwarden](https://github.com/bitwarden/android)
+* [Ente Auth](https://github.com/ente-io/ente) [[F-Droid](https://f-droid.org/packages/io.ente.auth)]
+* [FreeOTP+](https://github.com/helloworld1/FreeOTPPlus) [[F-Droid](https://f-droid.org/packages/org.liberty.android.freeotpplus)]
+* [Is Your Password Secure?](https://github.com/StellarSand/IYPS) [[F-Droid](https://f-droid.org/packages/com.iyps)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.iyps)]
+* [KeePassDX](https://github.com/Kunzisoft/KeePassDX) [[F-Droid](https://f-droid.org/packages/com.kunzisoft.keepass.libre)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.kunzisoft.keepass.libre)]
+* [Keyoxide](https://codeberg.org/keyoxide/keyoxide-flutter) [[F-Droid](https://f-droid.org/packages/org.keyoxide.keyoxide)]
+* [Mauth](https://github.com/X1nto/Mauth) [[F-Droid](https://f-droid.org/packages/com.xinto.mauth)]
+* [OpenKeychain](https://github.com/open-keychain/open-keychain) [[F-Droid](https://f-droid.org/packages/org.sufficientlysecure.keychain)]
+* [Password Monitor](https://github.com/StellarSand/Password-Monitor) [[F-Droid](https://f-droid.org/packages/com.password.monitor)]
+* [ProtonPass](https://github.com/protonpass/android-pass) [[F-Droid](https://f-droid.org/packages/proton.android.pass.fdroid)]
+* [Vault](https://github.com/arsvechkarev/Vault) [[F-Droid](https://f-droid.org/packages/com.arsvechkarev.vault)]
+
+### • Podcast & Audio Book Player
+
+* [AntennaPod](https://github.com/AntennaPod/AntennaPod) [[F-Droid](https://f-droid.org/packages/de.danoeh.antennapod)]
+* [Anytime Podcast Player](https://github.com/amugofjava/anytime_podcast_player) [[F-Droid](https://f-droid.org/packages/uk.me.amugofjava.anytime)]
+* [Audio Anchor](https://github.com/flackbash/AudioAnchor) [[F-Droid](https://f-droid.org/packages/com.prangesoftwaresolutions.audioanchor)]
+* [Escapepod](https://codeberg.org/y20k/escapepod) [[F-Droid](https://f-droid.org/packages/org.y20k.escapepod)]
+* [FocusPodcast](https://github.com/allentown521/FocusPodcast) [[F-Droid](https://f-droid.org/packages/allen.town.focus.podcast)]
+* [Libre Librivox listener](https://gitlab.com/libre-librivox-listener/libre-librivox-listener) [[F-Droid](https://f-droid.org/packages/io.gitlab.libre_librivox_listener)]
+* [Podcini.X](https://github.com/XilinJia/Podcini.X) [[F-Droid](https://f-droid.org/packages/ac.mdiq.podcini.X)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/ac.mdiq.podcini.X)]
+* [Podverse](https://github.com/podverse/podverse-fdroid) [[F-Droid](https://f-droid.org/packages/com.podverse.fdroid)]
+* [Tsacdop](https://github.com/stonega/tsacdop) [[F-Droid](https://f-droid.org/packages/com.stonegate.tsacdop)]
+* [Voice](https://github.com/PaulWoitaschek/Voice) [[F-Droid](https://f-droid.org/packages/de.ph1b.audiobook)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.ph1b.audiobook)]
+
+### • Privacy & Security
+
+* [AirGuard - AirTag tracking protection](https://github.com/seemoo-lab/AirGuard) [[F-Droid](https://f-droid.org/packages/de.seemoo.at_tracking_detection)]
+* [Exodus](https://github.com/Exodus-Privacy/exodus-android-app) [[F-Droid](https://f-droid.org/packages/org.eu.exodus_privacy.exodusprivacy)]
+* [PilferShush Jammer](https://github.com/kaputnikGo/PilferShushJammer) [[F-Droid](https://f-droid.org/packages/cityfreqs.com.pilfershushjammer)]
+* [Safe Space](https://github.com/aashishksahu/SafeSpace) [[F-Droid](https://f-droid.org/packages/org.privacymatters.safespace)]
+* [Valv](https://github.com/Arctosoft/Valv-Android) [[F-Droid](https://f-droid.org/packages/se.arctosoft.vault)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/se.arctosoft.vault)]
+
+### • Public Transport
+
+* [Bimba](https://git.apiote.xyz/Bimba.git) [[F-Droid](https://f-droid.org/packages/xyz.apiote.bimba.czwek)]
+* [Transito](https://git.sr.ht/~mil/transito) [[F-Droid](https://f-droid.org/packages/ht.sr.git.mil.transito)]
+* [Transportr](https://github.com/grote/transportr) [[F-Droid](https://f-droid.org/packages/de.grobox.liberario)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.grobox.liberario)]
+
+### • Religion
+
+* [Bhagavad Gita](https://github.com/WirelessAlien/BhagavadGitaApp) [[F-Droid](https://f-droid.org/packages/com.wirelessalien.android.bhagavadgita)]
+* [Dharmik](https://github.com/shub39/Dharmik) [[F-Droid](https://f-droid.org/packages/com.shub39.dharmik.online)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.shub39.dharmik.online)]
+* [PocketDhamma](https://github.com/s4nj1th/pocket-dhamma) [[F-Droid](https://f-droid.org/packages/com.s4nj1th.pocket_dhamma)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.s4nj1th.pocket_dhamma)]
+
+### • RSS Readers
+
+* [Aggregator](https://github.com/tughi/aggregator-android) [[F-Droid](https://f-droid.org/packages/com.tughi.aggregator)]
+* [Feeder](https://github.com/spacecowboy/Feeder) [[F-Droid](https://f-droid.org/packages/com.nononsenseapps.feeder)]
+* [FeedFlow](https://github.com/prof18/feed-flow) [[F-Droid](https://f-droid.org/packages/com.prof18.feedflow)]
+* [HandyNewsReader](https://github.com/yanus171/Handy-News-Reader) [[F-Droid](https://f-droid.org/packages/ru.yanus171.feedexfork)]
+* [NewsBlur](https://github.com/samuelclay/NewsBlur) [[F-Droid](https://f-droid.org/packages/com.newsblur)]
+* [Nunti](https://gitlab.com/ondrejfoltyn/nunti) [[F-Droid](https://f-droid.org/packages/com.nunti)]
+* [ReaDrops](https://github.com/readrops/Readrops) [[F-Droid](https://f-droid.org/packages/com.readrops.app)]
+* [ReadYou](https://github.com/Ashinch/ReadYou) [[F-Droid](https://f-droid.org/packages/me.ash.reader)]
+* [Thud](https://github.com/aerotoad/Thud) [[F-Droid](https://f-droid.org/packages/com.aerotoad.thud)]
+
+### • Sandboxing
+
+* [Insular](https://gitlab.com/secure-system/Insular) [[F-Droid](https://f-droid.org/packages/com.oasisfeng.island.fdroid)]
+* [Shelter](https://cgit.typeblog.net/Shelter) [[F-Droid](https://f-droid.org/packages/net.typeblog.shelter)]
+
+### • Science & Education
+
+* [Atomic - Periodic Table](https://github.com/JLindemann42/Atomic-Periodic-Table.Android) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.jlindemann.science)]
+* [Brainf](https://github.com/fredhappyface/android.brainf) [[F-Droid](https://f-droid.org/packages/com.fredhappyface.brainf)]
+* [Bubble](https://github.com/woheller69/level) [[F-Droid](https://f-droid.org/packages/org.woheller69.level)]
+* [ChemistryLab](https://gitlab.com/asdoi/ChemistryLab) [[F-Droid](https://f-droid.org/packages/com.chemistry.admin.chemistrylab)]
+* [Git+ Coach](https://github.com/vishal2376/git-coach) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.vishal2376.gitcoach)]
+* [Linux Command Library](https://github.com/SimonSchubert/LinuxCommandLibrary) [[F-Droid](https://f-droid.org/packages/com.inspiredandroid.linuxcommandbibliotheca)]
+* [phyphox](https://github.com/phyphox/phyphox-android) [[F-Droid](https://f-droid.org/packages/de.rwth_aachen.phyphox)]
+* [PSLab](https://github.com/fossasia/pslab-android) [[F-Droid](https://f-droid.org/packages/io.pslab)]
+* [Sky Map](https://github.com/sky-map-team/stardroid) [[F-Droid](https://f-droid.org/packages/com.google.android.stardroid)]
+* [Snow](https://github.com/sahej-dev/Snow) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.sahej.snow)]
+* [Wikipedia](https://github.com/wikimedia/apps-android-wikipedia) [[F-Droid](https://f-droid.org/packages/org.wikipedia)]
+
+### • SMS
+
+* [Fossify SMS Messenger](https://github.com/FossifyOrg/Messages) [[F-Droid](https://f-droid.org/packages/org.fossify.messages)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.fossify.messages)]
+* [Quik](https://github.com/octoshrimpy/quik) [[F-Droid](https://f-droid.org/packages/dev.octoshrimpy.quik)]
+
+### • Sports & Health
+
+* [Box, Box!](https://github.com/BrightDV/BoxBox) [[F-Droid](https://f-droid.org/packages/org.brightdv.boxbox)]
+* [Feeel](https://gitlab.com/enjoyingfoss/feeel) [[F-Droid](https://f-droid.org/packages/com.enjoyingfoss.feeel)]
+* [FitoTrack](https://codeberg.org/jannis/FitoTrack) [[F-Droid](https://f-droid.org/packages/de.tadris.fitness)]
+* [Flexify](https://github.com/brandonp2412/Flexify) [[F-Droid](https://f-droid.org/packages/com.presley.flexify)]
+* [hEARtest](https://github.com/woheller69/audiometry) [[F-Droid](https://f-droid.org/packages/org.woheller69.audiometry)]
+* [Meditation](https://github.com/nyxkn/meditation) [[F-Droid](https://f-droid.org/packages/com.nyxkn.meditation)]
+* [MedTimer](https://github.com/Futsch1/medTimer) [[F-Droid](https://f-droid.org/packages/com.futsch1.medtimer)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.futsch1.medtimer)]
+* [OpenTracks](https://github.com/OpenTracksApp/OpenTracks) [[F-Droid](https://f-droid.org/packages/de.dennisguse.opentracks)]
+* [Paseo](https://gitlab.com/pardomi/paseo) [[F-Droid](https://f-droid.org/packages/ca.chancehorizon.paseo)]
+* [Red Moon](https://github.com/LibreShift/red-moon) [[F-Droid](https://f-droid.org/packages/com.jmstudios.redmoon)]
+
+### • Synchronisation
+
+* [DAVx⁵](https://www.davx5.com/) [[F-Droid](https://f-droid.org/packages/at.bitfire.davdroid)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/at.bitfire.davdroid)]
+* [EteSync](https://github.com/etesync/android) [[F-Droid](https://f-droid.org/packages/com.etesync.syncadapter)]
+* [floccus](https://github.com/floccusaddon/floccus) [[F-Droid](https://f-droid.org/packages/org.handmadeideas.floccus)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.handmadeideas.floccus)]
+* [Nextcloud](https://github.com/nextcloud/android) [[F-Droid](https://f-droid.org/packages/com.nextcloud.client)]
+* [Nextcloud News](https://github.com/nextcloud/news-android) [[F-Droid](https://f-droid.org/packages/de.luhmer.owncloudnewsreader)]
+* [ownCloud](https://github.com/owncloud/android) [[F-Droid](https://f-droid.org/packages/com.owncloud.android)]
+* [Seafile](https://github.com/haiwen/seadroid) [[F-Droid](https://f-droid.org/packages/com.seafile.seadroid2)]
+* [Syncopoli](https://gitlab.com/fengshaun/syncopoli) [[F-Droid](https://f-droid.org/packages/org.amoradi.syncopoli)]
+* [Syncthing-Fork](https://github.com/Catfriend1/syncthing-android) [[F-Droid](https://f-droid.org/packages/com.github.catfriend1.syncthingfork)]
+* [Syncthing-Lite](https://github.com/Catfriend1/syncthing-lite) [[F-Droid](https://f-droid.org/packages/com.github.catfriend1.syncthinglite)]
+
+### • System
+
+* [AppManager](https://github.com/MuntashirAkon/AppManager) [[F-Droid](https://f-droid.org/packages/io.github.muntashirakon.AppManager)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/io.github.muntashirakon.AppManager)]
+* [aShell You](https://github.com/DP-Hridayan/aShellYou) [[IzzyOnDroid](https://apt.izzysoft.de/packages/in.hridayan.ashell)]
+* [Auditor](https://github.com/GrapheneOS/Auditor)
+* [AutoPie](https://github.com/cryptrr/AutoPie)
+* [Canta](https://github.com/samolego/Canta) [[F-Droid](https://f-droid.org/packages/org.samo_lego.canta)]
+* [Captive Portal Controller](https://github.com/MuntashirAkon/CaptivePortalController) [[F-Droid](https://f-droid.org/packages/io.github.muntashirakon.captiveportalcontroller)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/io.github.muntashirakon.captiveportalcontroller)]
+* [CPU Info](https://github.com/kamgurgul/cpu-info) [[F-Droid](https://f-droid.org/packages/com.kgurgul.cpuinfo)]
+* [Dark theme](https://github.com/phstudio2/Darktheme) [[F-Droid](https://f-droid.org/packages/com.phstudio.darktheme)]
+* [De-Bloater](https://github.com/sunilpaulmathew/De-Bloater) [[F-Droid](https://f-droid.org/packages/com.sunilpaulmathew.debloater)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.sunilpaulmathew.debloater)]
+* [Dhizuku](https://github.com/iamr0s/Dhizuku) [[F-Droid](https://f-droid.org/packages/com.rosan.dhizuku)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.rosan.dhizuku)]
+* [DSU Sideloader](https://github.com/VegaBobo/DSU-Sideloader) [[F-Droid](https://f-droid.org/packages/vegabobo.dsusideloader)]
+* [Geto](https://github.com/JackEblan/Geto) [[F-Droid](https://f-droid.org/packages/com.android.geto)]
+* [Headwind MDM Agent](https://github.com/h-mdm/hmdm-android) [[F-Droid](https://f-droid.org/packages/com.hmdm.launcher)]
+* [Inure App Manager (Trial)](https://github.com/Hamza417/Inure) [[F-Droid](https://f-droid.org/packages/app.simple.inure)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/app.simple.inure)]
+* [LibChecker](https://github.com/zhaobozhen/LibChecker) [[F-Droid](https://f-droid.org/packages/com.absinthe.libchecker)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.absinthe.libchecker)]
+* [LogFox](https://github.com/F0x1d/LogFox) [[F-Droid](https://f-droid.org/packages/com.f0x1d.logfox)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.f0x1d.logfox)]
+* [Network Survey](https://github.com/christianrowlands/android-network-survey) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.craxiom.networksurvey)]
+* [Nix-on-Droid](https://github.com/nix-community/nix-on-droid) [[F-Droid](https://f-droid.org/packages/com.termux.nix)]
+* [PCAPdroid](https://github.com/emanuele-f/PCAPdroid) [[F-Droid](https://f-droid.org/packages/com.emanuelef.remote_capture)]
+* [Permission Pilot](https://github.com/d4rken-org/permission-pilot) [[IzzyOnDroid](https://apt.izzysoft.de/packages/eu.darken.myperm)]
+* [ReVanced Manager](https://github.com/ReVanced/revanced-manager)
+* [Scoop](https://github.com/TacoTheDank/Scoop) [[F-Droid](https://f-droid.org/packages/taco.scoop)]
+* [SuperFreezZ](https://gitlab.com/SuperFreezZ/SuperFreezZ) [[F-Droid](https://f-droid.org/packages/superfreeze.tool.android)]
+* [SystemUI Tuner](https://github.com/zacharee/Tweaker) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.zacharee1.systemuituner)]
+* [TaskManager](https://github.com/RohitKushvaha01/TaskManager) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.rk.taskmanager)]
+* [Treble Info](https://gitlab.com/TrebleInfo/TrebleInfo) [[F-Droid](https://f-droid.org/packages/tk.hack5.treblecheck)]
+* [UpgradeAll](https://github.com/DUpdateSystem/UpgradeAll) [[F-Droid](https://f-droid.org/packages/net.xzos.upgradeall)]
+* [WifiAnalyzer](https://github.com/VREMSoftwareDevelopment/WiFiAnalyzer) [[F-Droid](https://f-droid.org/packages/com.vrem.wifianalyzer)]
+
+### • Terminals
+
+* [ReTerminal](https://github.com/RohitKushvaha01/ReTerminal) [[F-Droid](https://f-droid.org/packages/com.rk.terminal)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.rk.terminal)]
+* [Termux](https://github.com/termux/termux-app) [[F-Droid](https://f-droid.org/packages/com.termux)]
+
+### • Text Editors
+
+* [Acode](https://acode.foxdebug.com/) [[F-Droid](https://f-droid.org/packages/com.foxdebug.acode)]
+* [Editor](https://github.com/billthefarmer/editor) [[F-Droid](https://f-droid.org/packages/org.billthefarmer.editor)]
+* [Emacs](https://git.savannah.gnu.org/cgit/emacs.git/tree/?h=feature/android) [[F-Droid](https://f-droid.org/packages/org.gnu.emacs)]
+* [Squircle CE](https://github.com/massivemadness/Squircle-CE) [[F-Droid](https://f-droid.org/packages/com.blacksquircle.ui)]
+* [Xed-Editor (Karbon)](https://github.com/Xed-Editor/Xed-Editor) [[F-Droid](https://f-droid.org/packages/com.rk.xededitor)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.rk.xededitor)]
+
+### • Text-to-Speech
+
+* [eSpeak](https://github.com/espeak-ng/espeak-ng) [[F-Droid](https://f-droid.org/packages/com.reecedunn.espeak)]
+* [RHVoice](https://github.com/RHVoice/RHVoice) [[F-Droid](https://f-droid.org/packages/com.github.olga_yakovleva.rhvoice.android)]
+* [SherpaTTS](https://github.com/woheller69/ttsengine) [[F-Droid](https://f-droid.org/packages/org.woheller69.ttsengine)]
+
+### • ToDo Lists
+
+* [1List](https://github.com/lolo-io/OneList) [[F-Droid](https://f-droid.org/packages/com.lolo.io.onelist)]
+* [Everyday Tasks](https://github.com/jenspfahl/EverydayTasks) [[F-Droid](https://f-droid.org/packages/de.jepfa.personaltasklogger)]
+* [Orgzly](https://github.com/orgzly/orgzly-android) [[F-Droid](https://f-droid.org/packages/com.orgzly)]
+* [PocketPlan](https://github.com/RayLeaf-Studios/PocketPlan) [[F-Droid](https://f-droid.org/packages/com.pocket_plan.j7_003)]
+* [Tasks.org](https://github.com/tasks/tasks) [[F-Droid](https://f-droid.org/packages/org.tasks)]
+
+### • Translation
+
+* [DeepL](https://github.com/sakusaku3939/DeepLAndroid) [[F-Droid](https://f-droid.org/packages/com.example.deeplviewer)]
+* [Lentil Translate](https://github.com/yaxarat/lingvaandroid) [[F-Droid](https://f-droid.org/packages/dev.atajan.lingva_android)]
+* [SimplyTranslate Mobile](https://github.com/ManeraKai/simplytranslate_mobile) [[F-Droid](https://f-droid.org/packages/com.simplytranslate_mobile)]
+* [The Translator](https://github.com/sunilpaulmathew/Translator) [[F-Droid](https://f-droid.org/packages/com.sunilpaulmathew.translator)]
+* [Translate You](https://github.com/you-apps/TranslateYou) [[F-Droid](https://f-droid.org/packages/com.bnyro.translate)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.bnyro.translate)]
+
+### • URL Manipulation
+
+* [Leon](https://github.com/svenjacobs/leon) [[F-Droid](https://f-droid.org/packages/com.svenjacobs.app.leon)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.svenjacobs.app.leon)]
+* [LinkSheet](https://github.com/LinkSheet/LinkSheet) [[IzzyOnDroid](https://apt.izzysoft.de/packages/fe.linksheet)]
+* [Tarnhelm](https://github.com/lz233/Tarnhelm) [[F-Droid](https://f-droid.org/packages/cn.ac.lz233.tarnhelm)]
+* [Untracker](https://github.com/zhanghai/Untracker) [[F-Droid](https://f-droid.org/packages/me.zhanghai.android.untracker)]
+* [UntrackMe](https://framagit.org/tom79/nitterizeme) [[F-Droid](https://f-droid.org/packages/app.fedilab.nitterizeme)]
+* [URLCheck](https://github.com/TrianguloY/UrlChecker) [[F-Droid](https://f-droid.org/packages/com.trianguloy.urlchecker)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.trianguloy.urlchecker)]
+
+### • Utilities
+
+* [Amaze File Utilities](https://github.com/TeamAmaze/AmazeFileUtilities) [[F-Droid](https://f-droid.org/packages/com.amaze.fileutilities)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.amaze.fileutilities)]
+* [AVNC](https://github.com/gujjwal00/avnc) [[F-Droid](https://f-droid.org/packages/com.gaurav.avnc)]
+* [BendyStraw](https://codeberg.org/mm-dev/bendy-straw) [[F-Droid](https://f-droid.org/packages/rocks.mm_dev.BendyStraw)]
+* [BetterCounter](https://github.com/albertvaka/bettercounter) [[F-Droid](https://f-droid.org/packages/org.kde.bettercounter)]
+* [Cams](https://github.com/vladpen/cams) [[F-Droid](https://f-droid.org/packages/com.vladpen.cams)]
+* [ConnectBot](https://github.com/connectbot/connectbot) [[F-Droid](https://f-droid.org/packages/org.connectbot)]
+* [Converter NOW](https://github.com/ferraridamiano/ConverterNOW) [[F-Droid](https://f-droid.org/packages/com.ferrarid.converterpro)]
+* [Data Monitor](https://github.com/itsdrnoob/DataMonitor) [[F-Droid](https://f-droid.org/packages/com.drnoob.datamonitor)]
+* [DataBackup](https://github.com/XayahSuSuSu/Android-DataBackup) [[F-Droid](https://f-droid.org/packages/com.xayah.databackup.foss)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.xayah.databackup.foss)]
+* [DeadHash](https://github.com/CodeDead/DeadHash-android) [[F-Droid](https://f-droid.org/packages/com.codedead.deadhash)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.codedead.deadhash)]
+* [droidVNC-NG](https://github.com/bk138/droidVNC-NG) [[F-Droid](https://f-droid.org/packages/net.christianbeier.droidvnc_ng)]
+* [EtchDroid](https://github.com/EtchDroid/EtchDroid) [[F-Droid](https://f-droid.org/packages/eu.depau.etchdroid)]
+* [HexViewer](https://github.com/Keidan/HexViewer) [[F-Droid](https://f-droid.org/packages/fr.ralala.hexviewer)]
+* [InviZible Pro](https://github.com/Gedsh/InviZible) [[F-Droid](https://f-droid.org/packages/pan.alexander.tordnscrypt.stable)]
+* [Json List](https://github.com/SlaVcE14/JsonList) [[F-Droid](https://f-droid.org/packages/com.sjapps.jsonlist)]
+* [Keep Alive](https://github.com/keepalivedev/KeepAlive) [[F-Droid](https://f-droid.org/packages/io.keepalive.android)]
+* [Key Mapper](https://github.com/keymapperorg/KeyMapper) [[F-Droid](https://f-droid.org/packages/io.github.sds100.keymapper)]
+* [KeyStoreViewer](https://github.com/qdsfdhvh/KeyStoreViewer) [[F-Droid](https://f-droid.org/packages/com.seiko.keystoreviewer)]
+* [Linkora](https://github.com/LinkoraApp/Linkora) [[F-Droid](https://f-droid.org/packages/com.sakethh.linkora)]
+* [Neo Backup](https://github.com/NeoApplications/Neo-Backup) [[F-Droid](https://f-droid.org/packages/com.machiav3lli.backup)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.machiav3lli.backup)]
+* [NFCGate](https://github.com/nfcgate/nfcgate) [[F-Droid](https://f-droid.org/packages/de.tu_darmstadt.seemoo.nfcgate)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.tu_darmstadt.seemoo.nfcgate)]
+* [OCR](https://github.com/SubhamTyagi/android-ocr) [[F-Droid](https://f-droid.org/packages/io.github.subhamtyagi.ocr)]
+* [OONI Probe](https://github.com/ooni/probe-android) [[F-Droid](https://f-droid.org/packages/org.openobservatory.ooniprobe)]
+* [Open Video Editor](https://github.com/devhyper/open-video-editor) [[F-Droid](https://f-droid.org/packages/io.github.devhyper.openvideoeditor)]
+* [Orgro](https://orgro.org/) [[F-Droid](https://f-droid.org/packages/com.madlonkay.orgro)]
+* [PDF Converter](https://github.com/Swati4star/Images-to-PDF) [[F-Droid](https://f-droid.org/packages/swati4star.createpdf)]
+* [PlugBrain](https://github.com/msbelaid/PlugBrain) [[F-Droid](https://f-droid.org/packages/app.plugbrain.android)]
+* [Screen Time](https://github.com/markusfisch/ScreenTime) [[F-Droid](https://f-droid.org/packages/de.markusfisch.android.screentime)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.markusfisch.android.screentime)]
+* [SD Maid 2/SE](https://github.com/d4rken-org/sdmaid-se) [[F-Droid](https://f-droid.org/packages/eu.darken.sdmse)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/eu.darken.sdmse)]
+* [Sensorkraken](https://gitlab.com/sensorkraken/android-app) [[F-Droid](https://f-droid.org/packages/org.sensorkraken)]
+* [SMS Import / Export](https://github.com/tmo1/sms-ie) [[F-Droid](https://f-droid.org/packages/com.github.tmo1.sms_ie)]
+* [Track & Graph](https://github.com/SamAmco/track-and-graph) [[F-Droid](https://f-droid.org/packages/com.samco.trackandgraph)]
+* [TTS Util](https://github.com/Danesprite/tts-util-app) [[F-Droid](https://f-droid.org/packages/com.danefinlay.ttsutil)]
+* [Voice Notify](https://github.com/pilot51/voicenotify) [[F-Droid](https://f-droid.org/packages/com.pilot51.voicenotify)]
+* [Volta](https://github.com/x13a/Volta) [[F-Droid](https://f-droid.org/packages/me.lucky.volta)]
+
+### • Video Player
+
+* [Fermata Media Player](https://github.com/AndreyPavlenko/Fermata)
+* [Just (Video) Player](https://github.com/moneytoo/Player) [[F-Droid](https://f-droid.org/packages/com.brouken.player)]
+* [Kodi](https://github.com/xbmc/xbmc) [[F-Droid](https://f-droid.org/packages/org.xbmc.kodi)]
+    * [Kore](https://github.com/xbmc/Kore) [[F-Droid](https://f-droid.org/packages/org.xbmc.kore)]
+* [mpv for Android](https://github.com/mpv-android/mpv-android) [[F-Droid](https://f-droid.org/packages/is.xyz.mpv)]
+* [Next Player](https://github.com/anilbeesetti/nextplayer) [[F-Droid](https://f-droid.org/packages/dev.anilbeesetti.nextplayer)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/dev.anilbeesetti.nextplayer)]
+* [Nova Video Player](https://github.com/nova-video-player/aos-AVP) [[F-Droid](https://f-droid.org/packages/org.courville.nova)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.courville.nova)]
+* [VLC](https://www.videolan.org/vlc/download-android.html) [[F-Droid](https://f-droid.org/packages/org.videolan.vlc)]
+
+### • VPN
+
+* [Calyx VPN](https://gitlab.com/CalyxOS/bitmask_android) [[F-Droid](https://f-droid.org/packages/org.calyxinstitute.vpn)]
+* [IVPN](https://github.com/ivpn/android-app) [[F-Droid](https://f-droid.org/packages/net.ivpn.client)]
+* [Mullvad](https://github.com/mullvad/mullvadvpn-app) [[F-Droid](https://f-droid.org/packages/net.mullvad.mullvadvpn)]
+* [Mysterium VPN](https://github.com/mysteriumnetwork/mysterium-vpn-mobile) [[F-Droid](https://f-droid.org/packages/network.mysterium.vpn)]
+* [NekoBox for Android](https://github.com/MatsuriDayo/NekoBoxForAndroid)
+* [NymVPN](https://github.com/nymtech/nym-vpn-client) [[F-Droid](https://f-droid.org/packages/net.nymtech.nymvpn)]
+* [Orbot](https://github.com/guardianproject/orbot)
+* [ProtonVPN](https://github.com/ProtonVPN/android-app) [[F-Droid](https://f-droid.org/packages/ch.protonvpn.android)]
+* [Riseup VPN](https://0xacab.org/leap/bitmask_android) [[F-Droid](https://f-droid.org/packages/se.leap.riseupvpn)]
+* [Tailscale](https://github.com/tailscale/tailscale-android) [[F-Droid](https://f-droid.org/packages/com.tailscale.ipn)]
+* [UpVPN](https://github.com/upvpn/upvpn-app) [[F-Droid](https://f-droid.org/packages/app.upvpn.upvpn)]
+* [WG Tunnel](https://github.com/wgtunnel/wgtunnel) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.zaneschepke.wireguardautotunnel)]
+* [WireGuard](https://git.zx2c4.com/wireguard-android)
+
+### • Wallpapers
+
+* [Dark Mode Live Wallpaper](https://github.com/cvzi/darkmodewallpaper) [[F-Droid](https://f-droid.org/packages/com.github.cvzi.darkmodewallpaper)]
+* [Doodle](https://github.com/patzly/doodle-android) [[F-Droid](https://f-droid.org/packages/xyz.zedler.patrick.doodle)]
+* [GIF Live Wallpaper](https://github.com/redwarp/gif-wallpaper) [[F-Droid](https://f-droid.org/packages/net.redwarp.gifwallpaper)]
+* [Materials Live Wallpaper](https://github.com/Reminimalism/MaterialsLiveWallpaper) [[F-Droid](https://f-droid.org/packages/com.reminimalism.materialslivewallpaper)]
+* [Palette-Cycle](https://github.com/ManApart/palette-cycle) [[F-Droid](https://f-droid.org/packages/rak.pixellwp)]
+* [Paperize](https://github.com/Anthonyy232/Paperize) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.anthonyla.paperize)]
+* [Peristyle](https://github.com/Hamza417/Peristyle) [[F-Droid](https://f-droid.org/packages/app.simple.peri)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/app.simple.peri)]
+* [Slideshow Wallpaper](https://github.com/Doubi88/SlideshowWallpaper) [[F-Droid](https://f-droid.org/packages/io.github.doubi88.slideshowwallpaper)]
+* [Wall You](https://github.com/you-apps/WallYou) [[F-Droid](https://f-droid.org/packages/com.bnyro.wallpaper)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.bnyro.wallpaper)]
+* [WallFlow](https://github.com/ammargitham/WallFlow) [[F-Droid](https://f-droid.org/packages/com.ammar.wallflow)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.ammar.wallflow)]
+* [WallMan](https://gitlab.com/colorata/wallman) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.colorata.wallman)]
+* [Wave Lines Live Wallpaper](https://github.com/markusfisch/WaveLinesWallpaper) [[F-Droid](https://f-droid.org/packages/de.markusfisch.android.wavelines)]
+* [Zade's Wallpaper](https://github.com/zadeviggers/wallpaper) [[F-Droid](https://f-droid.org/packages/net.viggers.zade.wallpaper)]
+
+### • Weather
+
+* [Atmos Weather](https://github.com/atticuscornett/AtmosWeather) [[IzzyOnDroid](https://apt.izzysoft.de/packages/io.atticusc.atmosweather)]
+* [Breezy Weather](https://github.com/breezy-weather/breezy-weather) [[F-Droid](https://f-droid.org/packages/org.breezyweather)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/org.breezyweather)]
+* [Bura](https://github.com/davidtakac/bura) [[F-Droid](https://f-droid.org/packages/com.davidtakac.bura)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.davidtakac.bura)]
+* [Cirrus](https://github.com/woheller69/omweather) [[F-Droid](https://f-droid.org/packages/org.woheller69.omweather)]
+* [Clima](https://codeberg.org/Lacerte/clima) [[F-Droid](https://f-droid.org/packages/co.prestosole.clima)]
+* [Overmorrow Weather](https://github.com/bmaroti9/Overmorrow) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.marotidev.Overmorrow)]
+* [RadarWeather](https://github.com/woheller69/weather) [[F-Droid](https://f-droid.org/packages/org.woheller69.weather)]
+* [Rain](https://github.com/darkmoonight/Rain) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.yoshi.rain)]
+* [Tiny Weather Forecast Germany](https://codeberg.org/Starfish/TinyWeatherForecastGermany) [[F-Droid](https://f-droid.org/packages/de.kaffeemitkoffein.tinyweatherforecastgermany)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/de.kaffeemitkoffein.tinyweatherforecastgermany)]
+* [Weather](https://github.com/sunilpaulmathew/Weather) [[IzzyOnDroid](https://apt.izzysoft.de/packages/in.sunilpaulmathew.weatherwidget)]
+* [WeatherMaster](https://github.com/PranshulGG/WeatherMaster) [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.pranshulgg.weather_master_app)]
+
+-
+
+## Games
+
+### • Board
+
+* [Chess](https://github.com/jcarolus/android-chess) [[F-Droid](https://f-droid.org/packages/jwtc.android.chess)]
+* [Chess Clock](https://github.com/ChessCom/android-chessclock) [[F-Droid](https://f-droid.org/packages/com.chess.clock)]
+* [DroidFish](https://github.com/peterosterlund2/droidfish) [[F-Droid](https://f-droid.org/packages/org.petero.droidfish)]
+* [Flang](https://codeberg.org/jannis/FlangAndroid) [[F-Droid](https://f-droid.org/packages/de.tadris.flang)]
+* [Freebloks](https://github.com/shlusiak/Freebloks-Android) [[F-Droid](https://f-droid.org/packages/de.saschahlusiak.freebloks)]
+* [Halma](https://github.com/Crazy-Marvin/Halma) [[F-Droid](https://f-droid.org/packages/app.halma)]
+* [Lichess](https://github.com/lichess-org/lichobile/) [[F-Droid](https://f-droid.org/packages/org.lichess.mobileapp.free)]
+* [lidraughts](https://github.com/roepstoep/lidraughts)
+* [Mill](https://github.com/calcitem/Sanmill) [[F-Droid](https://f-droid.org/packages/com.calcitem.sanmill)]
+* [Open Chaos Chess](https://github.com/CorruptedArk/open-chaos-chess) [[F-Droid](https://f-droid.org/packages/dev.corruptedark.openchaoschess)]
+* [Simple Chess Clock](https://github.com/simenheg/simple-chess-clock) [[F-Droid](https://f-droid.org/packages/com.chessclock.android)]
+
+### • Card
+
+* [MTG Familiar](https://github.com/AEFeinstein/mtg-familiar) [[F-Droid](https://f-droid.org/packages/com.gelakinetic.mtgfam)]
+* [TriPeaks](https://github.com/mimoguz/tripeaks-gdx) [[F-Droid](https://f-droid.org/packages/ogz.tripeaks)]
+
+### • Educational
+
+* [Digits](https://github.com/foxtrotdev/learn-digits) [[F-Droid](https://f-droid.org/packages/eu.mokrzycki.learndigits)]
+* [Everest](https://github.com/mwageringel/everest) [[F-Droid](https://f-droid.org/packages/io.github.mwageringel.everest)]
+* [GCompris](https://invent.kde.org/education/gcompris.git) [[F-Droid](https://f-droid.org/packages/net.gcompris.full)]
+* [Geoperion](https://github.com/vulnerabbity/Geoperion) [[F-Droid](https://f-droid.org/packages/com.vulnerabbity.geoperion)]
+* [Quick Calculation](https://github.com/SubhamTyagi/quick-calculation) [[F-Droid](https://f-droid.org/packages/io.github.subhamtyagi.quickcalculation)]
+* [RUTMath](https://github.com/przemarbor/RUTMath) [[F-Droid](https://f-droid.org/packages/com.hexbit.rutmath)]
+* [The Powder Toy](https://github.com/The-Powder-Toy/The-Powder-Toy)
+* [Tux Math](https://gitlab.com/Afrikalan/tuxmath-android) [[F-Droid](https://f-droid.org/packages/org.afrikalan.tuxmath)]
+
+### • Emulator
+
+* [Dolphin](https://github.com/dolphin-emu/dolphin) [[F-Droid](https://f-droid.org/packages/org.dolphinemu.dolphinemu)]
+* [J2ME Loader](https://github.com/nikita36078/J2ME-Loader) [[F-Droid](https://f-droid.org/packages/ru.playsoftware.j2meloader)]
+* [Lemuroid](https://github.com/Swordfish90/Lemuroid) [[F-Droid](https://f-droid.org/packages/com.swordfish.lemuroid)]
+* [RetroArch](https://github.com/libretro/RetroArch) [[F-Droid](https://f-droid.org/packages/com.retroarch)]
+
+### • Miscellaneous
+
+* [Apple Flinger](https://gitlab.com/ar-/apple-flinger) [[F-Droid](https://f-droid.org/packages/com.gitlab.ardash.appleflinger.android)]
+* [Ball2Box](https://github.com/dulvui/ball2box) [[F-Droid](https://f-droid.org/packages/com.simondalvai.ball2box)]
+* [Breakout 71](https://gitlab.com/lecarore/breakout71) [[F-Droid](https://f-droid.org/packages/me.lecaro.breakout)]
+* [Burger Party](https://github.com/agateau/burgerparty) [[F-Droid](https://f-droid.org/packages/com.agateau.burgerparty)]
+* [DekaDico](https://github.com/vivekthazhathattil/dekadico) [[F-Droid](https://f-droid.org/packages/com.example.spokennumbers)]
+* [Destination Sol](https://github.com/MovingBlocks/DestinationSol) [[F-Droid](https://f-droid.org/packages/com.miloshpetrov.sol2.android)]
+* [Dooz](https://github.com/yamin8000/Dooz) [[F-Droid](https://f-droid.org/packages/io.github.yamin8000.dooz)]
+* [Endless Sky](https://github.com/thewierdnut/endless-mobile) [[F-Droid](https://f-droid.org/packages/com.github.thewierdnut.endless_mobile)]
+* [Falling Blocks](https://github.com/Sajeg/falling-blocks) [[F-Droid](https://f-droid.org/packages/org.sajeg.fallingblocks)]
+* [Luanti](https://github.com/minetest/minetest) [[F-Droid](https://f-droid.org/packages/net.minetest.minetest)]
+* [Pocket Broomball](https://github.com/dulvui/pocket-broomball) [[F-Droid](https://f-droid.org/packages/com.simondalvai.pocketbroomball)]
+* [Quinb](https://gitlab.com/deepdaikon/Quinb) [[F-Droid](https://f-droid.org/packages/xyz.deepdaikon.quinb)]
+* [Space Vertex Multiplayer](https://github.com/smart-fun/spacevertex) [[F-Droid](https://f-droid.org/packages/fr.arnaudguyon.spacevertex)]
+* [WordleSolver](https://github.com/billthefarmer/wordlesolver) [[F-Droid](https://f-droid.org/packages/org.billthefarmer.solver)]
+* [Xeonjia](https://gitlab.com/deepdaikon/Xeonjia) [[F-Droid](https://f-droid.org/packages/xyz.deepdaikon.xeonjia)]
+* [Zoysii](https://gitlab.com/deepdaikon/Zoysii) [[F-Droid](https://f-droid.org/packages/xyz.deepdaikon.zoysii)]
+
+### • Music
+
+* [Beat Feet](https://github.com/beat-game/beat-game) [[F-Droid](https://f-droid.org/packages/com.serwylo.beatgame)]
+* [CDLC Player](https://github.com/tilk/cdlc_player) [[F-Droid](https://f-droid.org/packages/eu.tilk.cdlcplayer)]
+* [PianOli](https://github.com/nicolasbrailo/PianOli) [[F-Droid](https://f-droid.org/packages/com.nicobrailo.pianoli)]
+
+### • Puzzle
+
+* [Block Puzzle Stone Wars](https://github.com/SoltauFintel/blockpuzzle) [[F-Droid](https://f-droid.org/packages/de.mwvb.blockpuzzle)]
+* [Flowit](https://github.com/Flowit-Game/Flowit) [[F-Droid](https://f-droid.org/packages/com.bytehamster.flowitgame)]
+* [Gauguin](https://github.com/meikpiep/gauguin) [[F-Droid](https://f-droid.org/packages/org.piepmeyer.gauguin)]
+* [LibreSudoku](https://github.com/kaajjo/Libre-Sudoku) [[F-Droid](https://f-droid.org/packages/com.kaajjo.libresudoku)]
+* [Minesweeper - Antimine](https://github.com/lucasnlm/antimine-android) [[F-Droid](https://f-droid.org/packages/dev.lucanlm.antimine)]
+* [Minute Maze](https://gitlab.com/ygingras/minute-maze) [[F-Droid](https://f-droid.org/packages/net.ygingras.minutemaze)]
+* [Open Sudoku](https://gitlab.com/opensudoku/opensudoku) [[F-Droid](https://f-droid.org/packages/org.moire.opensudoku)]
+* [Simon Tatham's Puzzles](https://github.com/chrisboyle/sgtpuzzles) [[F-Droid](https://f-droid.org/packages/name.boyle.chris.sgtpuzzles)]
+* [Simple Sudoku Game](https://git.harrault.fr/android/org.benoitharrault.sudoku) [[F-Droid](https://f-droid.org/packages/org.benoitharrault.sudoku)]
+* [Sleuth](https://codeberg.org/BWPanda/sleuth)
+* [Sudoku](https://github.com/TheSunCat/Sudoku) [[F-Droid](https://f-droid.org/packages/com.thesuncat.sudoku)]
+
+### • Racing
+
+* [Lato](https://gitlab.com/ar-/lato) [[F-Droid](https://f-droid.org/packages/ardash.lato)]
+* [Pixel Wheels](https://github.com/agateau/pixelwheels) [[F-Droid](https://f-droid.org/packages/com.agateau.tinywheels.android)]
+* [SuperTuxKart](https://github.com/supertuxkart/stk-code) [[F-Droid](https://f-droid.org/packages/org.supertuxkart.stk)]
+
+### • Retro
+
+* [Super Retro Mega Wars](https://github.com/retrowars/retrowars) [[F-Droid](https://f-droid.org/packages/com.serwylo.retrowars)]
+
+### • Strategy
+
+* [Chip Defense](https://github.com/ochadenas/cpudefense) [[F-Droid](https://f-droid.org/packages/de.chadenas.cpudefense)]
+* [Feudal Tactics](https://github.com/Sesu8642/FeudalTactics) [[F-Droid](https://f-droid.org/packages/de.sesu8642.feudaltactics)]
+* [Mindustry](https://github.com/Anuken/Mindustry) [[F-Droid](https://f-droid.org/packages/io.anuke.mindustry)]
+* [OpenTTD](https://github.com/n-ice-community/commandergenius) [[F-Droid](https://f-droid.org/packages/org.openttd.fdroid)]
+* [Planes](https://github.com/xxxcucus/planes) [[F-Droid](https://f-droid.org/packages/com.planes.android)]
+* [Revengate](https://gitlab.com/ygingras/revengate) [[F-Droid](https://f-droid.org/packages/org.revengate.revengate)]
+* [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon) [[F-Droid](https://f-droid.org/packages/com.shatteredpixel.shatteredpixeldungeon)]
+* [UnCiv](https://github.com/yairm210/UnCiv) [[F-Droid](https://f-droid.org/packages/com.unciv.app)]
+
+### • Word
+
+* [CrossWords](http://xwords.sourceforge.net/source.php) [[F-Droid](https://f-droid.org/packages/org.eehouse.android.xw4)]
+* [Forkyz](https://gitlab.com/Hague/forkyz) [[F-Droid](https://f-droid.org/packages/app.crossword.yourealwaysbe.forkyz)]
+* [Gurgle](https://github.com/billthefarmer/gurgle) [[F-Droid](https://f-droid.org/packages/org.billthefarmer.gurgle)]
+* [Lexica](https://github.com/lexica/lexica) [[F-Droid](https://f-droid.org/packages/com.serwylo.lexica)]
+
+-
+
+## Rooting and Recovery
+
+* [APatch](https://github.com/bmax121/APatch) [[IzzyOnDroid](https://apt.izzysoft.de/packages/me.bmax.apatch)]
+* [KernelSU](https://kernelsu.org) [[IzzyOnDroid](https://apt.izzysoft.de/packages/me.weishu.kernelsu)]
+* [Magisk](https://github.com/topjohnwu/Magisk) [[F-Droid](https://f-droid.org/packages/com.topjohnwu.magisk)] [[IzzyOnDroid](https://apt.izzysoft.de/packages/com.topjohnwu.magisk)]
+* [OrangeFox Recovery](https://orangefox.download)
+* [Pitch Black Recovery Project](https://pitchblackrecovery.com)
+* [SKYHAWK Recovery Project](https://skyhawkrecovery.github.io)
+* [TWRP](https://twrp.me)
+
+-
+
+## Tools
+
+* [ACVTool](https://github.com/pilgun/acvtool)
+* [APK Editor Studio](https://github.com/kefir500/apk-editor-studio)
+* [APK2Url](https://github.com/n0mi1k/apk2url)
+* [APKLab](https://github.com/APKLab/APKLab)
+* [Apktool](https://github.com/iBotPeaches/Apktool)
+* [APKToolGUI](https://github.com/AndnixSH/APKToolGUI)
+* [Shizuku](https://github.com/RikkaApps/Shizuku)
+* [Universal Android Debloater GUI](https://github.com/Universal-Debloater-Alliance/universal-android-debloater)
+
+-
+
+## Tutorials and Guides
+
+* [Android App Permissions by IzzySoft](https://android.izzysoft.de/applists/perms)
+* [Android Debloat List](https://github.com/MuntashirAkon/android-debloat-list)
+* [OTA on Rooted Device](tutorials/Install-Rooted-OTA.md)
+
+-
+
+## Getting more
+
+* [Awesome F-Droid Apps](https://github.com/moneytoo/awesome-fdroid)
+* [Awesome Shizuku Apps](https://github.com/timschneeb/awesome-shizuku)
+* [CellularPrivacy – Recommendations](https://github.com/CellularPrivacy/Android-IMSI-Catcher-Detector/wiki/Recommendations)
+* [F-Droid](https://f-droid.org)
+* [Fossdroid](https://fossdroid.com)
+* [Guardian Project](https://guardianproject.info)
+* [IzzyOnDroid F-Droid Repository](https://apt.izzysoft.de/fdroid/) / [IzzyOnDroid Website](https://izzyondroid.org/)
+* [List of free and open-source Android applications](https://en.wikipedia.org/wiki/List_of_free_and_open-source_Android_applications)
+* [OpenApk](https://github.com/mobilenetworkltd/openapk)
+`;
+
+        // --- 1. ID GENERATOR ENGINE (CONSISTENT) ---
+        // --- 1. ID GENERATOR ENGINE (IMPROVED) ---
+        function cleanID(str) {
+            if (!str) return '';
+            return str.toLowerCase()
+                .replace(/^#/, '')
+                .replace(/&amp;/g, '') // Handle encoded chars
+                .replace(/&/g, '')
+                .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+                .trim()
+                .replace(/\s+/g, '-')   // Space to dash
+                .replace(/-+/g, '-')    // Multiple dashes to one
+                .replace(/^-+|-+$/g, ''); // Trim start/end dashes
+        }
+
+        // --- 2. PARSER ENGINE ---
+        function parseMarkdownToData(md) {
+            const lines = md.split('\n');
+            const data = [];
+            let currentSection = null;
+            let currentSub = null;
+
+            const cleanTitle = (str) => str.replace(/^##\s+|###\s+|[*]\s+/g, '').replace(/\.{3}|/g, '').trim();
+
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line) return;
+
+                if (line.startsWith('## ')) {
+                    const title = cleanTitle(line);
+                    const id = cleanID(title);
+
+                    currentSection = { type: 'section', title: title, id: id, subsections: [] };
+                    data.push(currentSection);
+                    currentSub = null;
+                }
+                else if (line.startsWith('### ')) {
+                    const title = cleanTitle(line);
+                    const id = cleanID(title);
+
+                    if (currentSection) {
+                        currentSub = { title: title, id: id, items: [] };
+                        currentSection.subsections.push(currentSub);
+                    }
+                }
+                else if (line.startsWith('* ')) {
+                    if (currentSection) {
+                        if (!currentSub) {
+                            currentSub = { title: '', id: currentSection.id + '-items', items: [] };
+                            currentSection.subsections.push(currentSub);
+                        }
+                        const internalMatch = line.match(/\[(.*?)\]\((#.*?)\)/);
+                        const externalMatch = line.match(/\[(.*?)\]\((.*?)\)/);
+
+                        if (internalMatch) {
+                            const navName = internalMatch[1];
+                            const targetID = cleanID(internalMatch[2]);
+                            currentSub.items.push({
+                                type: 'nav',
+                                name: navName,
+                                url: '#' + targetID
+                            });
+                        } else if (externalMatch) {
+                            const name = externalMatch[1];
+                            const url = externalMatch[2];
+                            let remaining = line.replace(externalMatch[0], '');
+                            let mirrors = [];
+                            const mirrorRegex = /\[\[(.*?)\]\((.*?)\)\]/g;
+                            let mirrorMatch;
+                            while ((mirrorMatch = mirrorRegex.exec(remaining)) !== null) {
+                                mirrors.push({ name: mirrorMatch[1], url: mirrorMatch[2] });
+                            }
+                            currentSub.items.push({ type: 'app', name: name, url: url, mirrors: mirrors });
+                        }
+                    }
+                }
+            });
+            return data;
+        }
+
+
+
+        // --- 3. RENDER ENGINE ---
+        const contentArea = document.getElementById('contentArea');
+        const desktopNav = document.getElementById('desktopNav');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        function renderNav(data) {
+            // Filter TOC agar tidak muncul di navbar
+            const navItems = data.filter(s => s.id !== 'table-of-contents');
+
+            let html = '';
+            navItems.forEach(section => {
+                html += `<a href="#${section.id}" class="nav-link">${section.title}</a>`;
+            });
+
+            desktopNav.innerHTML = html;
+            mobileMenu.innerHTML = html;
+
+            // Logic Active State & Close Mobile Menu
+            const links = document.querySelectorAll('.nav-link, .mobile-menu a');
+            links.forEach(link => {
+                link.addEventListener('click', function () {
+                    links.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    mobileMenu.classList.remove('open');
+                });
+            });
+        }
+
+        function createItemHTML(item) {
+            if (item.type === 'nav') {
+                return `<a href="${item.url}">${item.name}</a>`;
+            } else {
+                let mirrorsHtml = item.mirrors.map(m => `<a href="${m.url}" target="_blank" class="mirror-link">${m.name}</a>`).join('');
+
+                return `<div class="app-item">
+                        <div class="app-info">
+                            <a href="${item.url}" target="_blank" class="app-name">${item.name}</a>
+                        </div>
+                        <div class="app-links">
+                            ${mirrorsHtml || '<span style="opacity:0.5; font-size:0.8rem; padding:4px;">Direct Source</span>'}
+                        </div>
+                    </div>`;
+            }
+        }
+
+        // --- RENDER ALL AT ONCE (No Pagination) ---
+        function renderAllContent(data) {
+            // Build one giant HTML string
+            let fullHtml = '';
+
+            data.forEach((section, index) => {
+                // Add slide animation delay based on section index to prevent lag but keep effect
+                const style = ''; // Remove animation for performance in bulk render or keep minimal
+
+                fullHtml += `<div class="section-card" id="${section.id}">
+                            <h2 id="${section.id}">${section.title}</h2>`;
+
+                section.subsections.forEach(sub => {
+                    if (sub.title) fullHtml += `<h3 id="${sub.id}">${sub.title}</h3>`;
+
+                    if (sub.items.length > 0) {
+                        if (sub.items[0].type === 'nav') {
+                            fullHtml += `<div class="nav-grid">`;
+                            sub.items.forEach(item => fullHtml += createItemHTML(item));
+                            fullHtml += `</div>`;
+                        } else {
+                            fullHtml += `<div class="app-container">`;
+                            sub.items.forEach(item => fullHtml += createItemHTML(item));
+                            fullHtml += `</div>`;
+                        }
+                    }
+                });
+                fullHtml += `</div>`;
+            });
+
+            contentArea.innerHTML = fullHtml;
+        }
+
+        // Skeleton Generator
+        function showSkeleton() {
+            let html = '';
+            for (let i = 0; i < 3; i++) {
+                html += `<div class="skeleton-card shimmer">
+                        <div class="skeleton-header"></div>
+                        <div class="skeleton-item"></div>
+                        <div class="skeleton-item"></div>
+                        <div class="skeleton-item"></div>
+                     </div>`;
+            }
+            contentArea.innerHTML = html;
+        }
+
+        // --- PERBAIKAN SCROLL HANDLER (SIMPLIFIED & FIXED) ---
+        // --- PERBAIKAN SCROLL HANDLER (MANUAL CALCULATION FOR ACCURACY) ---
+        document.addEventListener('click', function (e) {
+            const targetLink = e.target.closest('a[href^="#"]');
+
+            if (targetLink) {
+                e.preventDefault();
+
+                // 1. Get raw HREF and Clean ID
+                const rawHref = targetLink.getAttribute('href');
+                const id = cleanID(rawHref);
+
+                // 2. Find Element
+                let targetElement = document.getElementById(id);
+
+                // Fallback: Try matching by Text Content if ID fails
+                if (!targetElement) {
+                    const allHeaders = document.querySelectorAll('h2, h3');
+                    for (let h of allHeaders) {
+                        if (cleanID(h.textContent) === id) {
+                            targetElement = h;
+                            break;
+                        }
+                    }
+                }
+
+                if (targetElement) {
+                    // 3. Manual Scroll Calculation (Fixes Header Overlap Reliability)
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 80;
+                    const extraPadding = 20; // Slightly more padding for aesthetics
+
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight - extraPadding;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+
+                    // 4. Highlight
+                    document.querySelectorAll('.highlight-target').forEach(el => {
+                        el.style.background = 'transparent';
+                        el.classList.remove('highlight-target');
+                    });
+                    targetElement.classList.add('highlight-target');
+                    targetElement.style.transition = "background 0.5s ease";
+                    targetElement.style.background = "rgba(79, 70, 229, 0.15)";
+                    setTimeout(() => targetElement.style.background = "transparent", 2000);
+
+                    // 5. Mobile Menu Interaction
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu && mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                    }
+
+                    // 6. Update URL
+                    history.pushState(null, null, '#' + id);
+                } else {
+                    console.warn("Target not found for:", id);
+                }
+            }
+        });
+
+        // --- 5. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme
+            // Toggle View Grid/List
+            const viewBtn = document.getElementById('viewToggleBtn');
+            viewBtn.addEventListener('click', () => {
+                contentArea.classList.toggle('view-grid');
+                const isGrid = contentArea.classList.contains('view-grid');
+                viewBtn.textContent = isGrid ? '≣' : '⊞'; // Icons: List vs Grid
+            });
+
+            // Toggle Theme
+            const themeBtn = document.getElementById('themeBtn');
+            const html = document.documentElement;
+            themeBtn.addEventListener('click', () => {
+                const newT = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', newT);
+                localStorage.setItem('theme', newT);
+            });
+
+            // Hamburger
+            const hamburger = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+
+            // Load Process
+            showSkeleton(); // 1. Show Shimmer Immediately
+
+            // 2. Parse & Render (Simulate small delay for visual effect of shimmer)
+            setTimeout(() => {
+                appData = parseMarkdownToData(rawMarkdown);
+                renderNav(appData);
+
+                // Render Real Content
+                renderAllContent(appData);
+
+                // Start GSAP
+                initGSAP();
+
+            }, 800); // 800ms "Loading" time
+
+            // Search
+            const searchBox = document.getElementById('searchBox');
+            let t;
+            searchBox.addEventListener('input', (e) => {
+                clearTimeout(t);
+                t = setTimeout(() => {
+                    const q = e.target.value.toLowerCase();
+                    // Instead of clearing, we could show skeleton, but for search speed better to just render
+
+                    if (!q) { renderAllContent(appData); return; }
+
+                    const filtered = [];
+                    appData.forEach(s => {
+                        const subMatches = [];
+                        s.subsections.forEach(sub => {
+                            const itemMatches = sub.items.filter(i => i.name.toLowerCase().includes(q));
+                            if (itemMatches.length) subMatches.push({ ...sub, items: itemMatches });
+                        });
+                        if (subMatches.length) filtered.push({ ...s, subsections: subMatches });
+                    });
+
+                    if (filtered.length) renderAllContent(filtered);
+                    else contentArea.innerHTML = '<div style="text-align:center; padding: 40px;">No results found.</div>';
+                }, 300);
+            });
+
+            // Back To Top
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                scrollBtn.classList.toggle('visible', window.scrollY > 400);
+            });
+            scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        });
+
+        let isAnimating = true; // Penanda Animasi Sedang Berjalan
+
+        // --- ANIMATION INIT ---
+        function initGSAP() {
+            // Hero Image Animation
+            const wrapper = document.querySelector('#heroWrapper');
+            const img = document.querySelector('#heroImg');
+            const shine = document.querySelector('.shine');
+
+            if (wrapper && img && shine && typeof gsap !== 'undefined') {
+                gsap.set(wrapper, { opacity: 1 });
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        isAnimating = false;
+                        console.log("Hero Animation Complete.");
+                    }
+                });
+                tl.from(wrapper, { duration: 2.25, y: 50, opacity: 0, rotationX: 30, scale: 0.9, ease: "power4.out" })
+                    .from(img, { duration: 2.25, scale: 1.1, filter: "blur(5px)", ease: "expo.out" }, "-=1.8")
+                    .fromTo(shine, { x: "-100%" }, { duration: 1.2, x: "200%", ease: "power2.inOut" }, "-=1.5");
+
+                gsap.to(wrapper, {
+                    y: "-=15", rotationZ: 1, duration: 4.5, yoyo: true, repeat: -1,
+                    ease: "sine.inOut", delay: 2.25
+                });
+
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseleave', handleMouseLeave);
+            }
+
+            // Text Split Animation
+            const textEl = document.querySelector('.text');
+            if (textEl && typeof SplitType !== 'undefined') {
+                let split = new SplitType(textEl, { types: 'lines' });
+                let animation;
+
+                animation && animation.revert();
+                animation = gsap.from(split.lines, {
+                    rotationX: -100,
+                    transformOrigin: "50% 50% -160px",
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power3",
+                    stagger: 0.25
+                });
+
+                // Re-split on resize for responsive lines
+                window.addEventListener('resize', () => {
+                    split.split();
+                    // Optionally re-run animation or just let it sit
+                    gsap.set(split.lines, { opacity: 1, rotationX: 0 });
+                });
+            }
+        }
+
+        // Mouse Move Handler (Dipisah)
+        function handleMouseMove(e) {
+            // Cek: Apakah animasi intro sudah selesai?
+            if (isAnimating) return; // Abaikan Mouse
+
+            const xPct = (e.clientX / window.innerWidth) - 0.5;
+            const yPct = (e.clientY / window.innerHeight) - 0.5;
+
+            gsap.to(document.querySelector('#heroWrapper'), {
+                duration: 0.1,
+                rotationY: xPct * 20, // efek "Miring" horizontal
+                rotationX: -yPct * 20, // efek "Miring" vertikal
+                ease: "power2.out",
+                transformPerspective: 1000,
+                transformOrigin: "center",
+                overwrite: 'auto' // Izinkan timpa dari Floating
+            });
+        }
+
+        // Mouse Leave Handler (Reset)
+        function handleMouseLeave() {
+            gsap.to(document.querySelector('#heroWrapper'), {
+                duration: 0.1,
+                rotationY: 0,
+                rotationX: 0,
+                ease: "elastic.out(1, 0.5)",
+                overwrite: 'auto'
+            });
+        }
+    </script>
+
+</body>
+
+</html>
